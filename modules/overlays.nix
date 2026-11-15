@@ -46,7 +46,6 @@
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
-                sem-cli
                 openshot-qt
                 stuntrally
                 ;
