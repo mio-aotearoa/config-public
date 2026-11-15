@@ -22,7 +22,6 @@ let
       )
       lynx
       nh
-      nur.repos.mio.nurl_patched
       jadx
       cachix
       wrangler
@@ -46,6 +45,7 @@ let
     { pkgs, inputs, ... }:
     with pkgs;
     [
+      nur.repos.mio.nurl_patched
       autossh
       go
       nvfetcher # with hardened: fatal allocator error: invalid free
