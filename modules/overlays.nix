@@ -38,8 +38,9 @@
               mio = inputs.mio.legacyPackages."${system}";
             in
             {
-              inherit (mio) wireguird darling miodroid;
+              inherit (mio) wireguird miodroid;
               inherit (mio.patched)
+                darling
                 grub2
                 starship
                 sniffnet
