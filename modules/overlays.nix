@@ -47,7 +47,6 @@
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
-                openshot-qt
                 stuntrally
                 ;
             }
