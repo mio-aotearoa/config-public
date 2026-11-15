@@ -31,6 +31,12 @@
           services.displayManager.plasma-login-manager.enable = lib.mkForce false;
           services.displayManager.sddm.enable = lib.mkForce false;
           services.displayManager.defaultSession = lib.mkForce "cutefish-wayland";
+          # Cutefish exports WAYLAND_DISPLAY=cutefish-0. Firejail's shared
+          # runtime whitelist only includes wayland-*, hiding this socket from
+          # Telegram, Chromium, and other sandboxed Wayland clients.
+          environment.etc."firejail/whitelist-runuser-common.local".text = ''
+            whitelist ''${RUNUSER}/cutefish-0
+          '';
           # Plasma stays enabled and also sets this with mkDefault. The
           # Cutefish module ships the same portals.conf as this attrset
           # (data/cutefish-portals.conf); /etc is what the session looks up
