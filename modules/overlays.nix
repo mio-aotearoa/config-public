@@ -40,6 +40,7 @@
             {
               inherit (mio) wireguird miodroid;
               inherit (mio.patched)
+                vscodium
                 darling
                 grub2
                 starship
@@ -99,6 +100,7 @@
             {
               raycast = mio.raycast_macos15;
               inherit (mio.patched)
+                vscodium
                 jadx
                 starship
                 qbittorrent-enhanced
