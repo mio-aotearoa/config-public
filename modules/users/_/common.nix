@@ -13,6 +13,7 @@ let
     [
       # also available from nixpkgs vscode-extensions. :
       #neveruse#nix-vscode-extensions.vscode-marketplace.scalameta.metals
+      nix-vscode-extensions.vscode-marketplace.rocq-prover.vsrocq
       nix-vscode-extensions.vscode-marketplace.scala-lang.scala
       nix-vscode-extensions.vscode-marketplace.haskell.haskell
       vscode-extensions.justusadam.language-haskell # haskell.haskell really depends on this??
@@ -267,6 +268,7 @@ in
           ghc
       */
       nixd
+      rocqPackages.vsrocq-language-server
     ];
 
   # VSCodium is the default editor. VSCode stays fully configured as a fallback

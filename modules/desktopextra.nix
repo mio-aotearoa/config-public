@@ -26,7 +26,12 @@
         systemPackages_hardened = with pkgs; [
           progs.inkscape
           cyberchef
-          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.comaps
+          (
+            if pkgs.stdenv.hostPlatform.isDarwin then
+              inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.comaps
+            else
+              comaps
+          )
           photocraft
           deckcraft
           gridcraft
@@ -271,7 +276,7 @@
           "zoom"
           "racket"
           "cursor"
-          "affinity"
+          #"affinity"
           "microsoft-teams"
           "adobe-acrobat-reader"
           "adobe-creative-cloud"

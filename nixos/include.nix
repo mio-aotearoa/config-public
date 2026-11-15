@@ -325,11 +325,11 @@ let
                 git commit -m "nixos: lockup" || true
                 git push
                 cd ../../config/nixos
-                git pull --no-edit https://github.com/mio-19/config-public.git
+                git pull --no-edit https://github.com/mio-aotearoa/config-public.git
               else
                 echo "[WARNING] ../../config-public does not exist" >&2
             ''}
-              git pull --no-edit https://github.com/mio-19/config-public.git
+              git pull --no-edit https://github.com/mio-aotearoa/config-public.git
               ${lib.getExe config.nix.package} flake update
               git add flake.lock
               git commit -m "nixos: lockup" || true
@@ -348,7 +348,7 @@ let
             fi
             git config pull.rebase false
             sudo true # sudo with pipe can cause issues when sudo wants a password. this pre-authenticates
-            (git -c http.lowSpeedLimit=10000 -c http.lowSpeedTime=10 -c core.sshCommand="ssh -o ConnectTimeout=15" pull --no-edit && git -c http.lowSpeedLimit=10000 -c http.lowSpeedTime=10 -c core.sshCommand="ssh -o ConnectTimeout=15" pull --no-edit https://github.com/mio-19/config-public.git) || true
+            (git -c http.lowSpeedLimit=10000 -c http.lowSpeedTime=10 -c core.sshCommand="ssh -o ConnectTimeout=15" pull --no-edit && git -c http.lowSpeedLimit=10000 -c http.lowSpeedTime=10 -c core.sshCommand="ssh -o ConnectTimeout=15" pull --no-edit https://github.com/mio-aotearoa/config-public.git) || true
             git push &
           '';
         in

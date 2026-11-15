@@ -15,19 +15,28 @@
       }:
       {
         imports = [
-          # https://github.com/mio-19/nurpkgs/blob/main/modules/cutefish.nix
+          # https://github.com/mio-aotearoa/nurpkgs/blob/main/modules/cutefish.nix
           inputs.mio.nixosModules.cutefish
         ];
 
-        # Use SDDM for the Cutefish session. Plasma Login Manager is KDE-specific
-        # and offers no Cutefish integration; cutefish-dm stays unused.
+        # cutefish-dm is the Cutefish session's own display manager. The nurpkgs
+        # module sets services.displayManager.enable and claims
+        # display-manager.service, so every other DM has to be off here. It reads
+        # autologin from the shared services.displayManager options via
+        # /etc/cutefish-dm.conf, like SDDM and LightDM do.
         specialisation.cutefish.configuration = lib.mkIf (!config.services.desktopManager.cutefish.enable) {
           services.desktopManager.cutefish.enable = true;
           system.nixos.tags = [ "cutefish" ];
+          services.displayManager.cutefish-dm.enable = lib.mkForce true;
           services.displayManager.plasma-login-manager.enable = lib.mkForce false;
-          services.displayManager.sddm.enable = lib.mkForce true;
-          services.displayManager.sddm.wayland.enable = lib.mkForce false;
+          services.displayManager.sddm.enable = lib.mkForce false;
           services.displayManager.defaultSession = lib.mkForce "cutefish-wayland";
+          # Cutefish exports WAYLAND_DISPLAY=cutefish-0. Firejail's shared
+          # runtime whitelist only includes wayland-*, hiding this socket from
+          # Telegram, Chromium, and other sandboxed Wayland clients.
+          environment.etc."firejail/whitelist-runuser-common.local".text = ''
+            whitelist ''${RUNUSER}/cutefish-0
+          '';
           # Plasma stays enabled and also sets this with mkDefault. The
           # Cutefish module ships the same portals.conf as this attrset
           # (data/cutefish-portals.conf); /etc is what the session looks up

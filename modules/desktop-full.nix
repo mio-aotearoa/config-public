@@ -243,6 +243,7 @@
       in
       {
         systemPackages_hardened = with pkgs; [
+          trayscale
           localsend
           element-desktop
           qbittorrent-enhanced
@@ -273,7 +274,6 @@
             kiwix
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.uplink
             simple-scan
-            trayscale
             (wrapPrio gnome-calculator)
             (wrapPrio gnome-system-monitor)
             krita
@@ -563,7 +563,7 @@
                 appId = "io.github.crossplatform.icloud-for-linux";
                 sha256 = "sha256-2MvGVZclrlogqQI317HG0dmodZlQ2iRowyGWrbR9RfI=";
                 bundle = "${pkgs.fetchurl {
-                  url = "https://github.com/mio-19/upload/raw/refs/heads/main/icloud-for-linux.flatpak";
+                  url = "https://github.com/mio-aotearoa/upload/raw/refs/heads/main/icloud-for-linux.flatpak";
                   inherit sha256;
                 }}";
               }
@@ -589,7 +589,6 @@
         environment.systemPackages = with pkgs; [
           #kiwix-apple
           nur.repos.mio.kiwix_patched
-          trayscale
         ];
         homebrew.casks = [
           "nextcloud"

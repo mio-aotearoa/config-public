@@ -38,22 +38,15 @@
               mio = inputs.mio.legacyPackages."${system}";
             in
             {
-              inherit (mio) wireguird darling miodroid;
+              inherit (mio) wireguird miodroid;
               inherit (mio.patched)
+                vscodium
+                darling
                 grub2
                 starship
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
-                chatgpt
-                codex
-                polarity
-                rayburst
-                rustdesk
-                sem-cli
-                thonny
-                rustdesk-flutter
-                openshot-qt
                 stuntrally
                 ;
             }
@@ -106,10 +99,12 @@
             {
               raycast = mio.raycast_macos15;
               inherit (mio.patched)
+                vscodium
                 jadx
                 starship
                 qbittorrent-enhanced
                 uutils-diffutils
+                trayscale
                 ;
             }
           )

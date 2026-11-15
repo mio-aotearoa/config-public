@@ -75,28 +75,30 @@ with _include;
 
   boot.loader = {
     timeout = 3;
-    grub.enable = true;
-    grub.memtest86.enable = true;
-    grub.configurationLimit = 5;
-    # https://nixos.wiki/wiki/Dual_Booting_NixOS_and_Windows
-    grub.useOSProber = true;
-    # https://discourse.nixos.org/t/question-about-grub-and-nodev/37867
-    grub.device = "nodev";
-    # https://www.reddit.com/r/NixOS/comments/klahwf/comment/kt10tt8
-    grub.default = "saved";
-    #sagrub.default = "'Windows Boot Manager'";
-    grub.efiSupport = true;
-    efi.canTouchEfiVariables = true;
-    grub2-theme = {
+    # previously GRUB: see ./grub.nix.disabled
+    limine = {
       enable = true;
-      #splashImage = config.system_background; # unable to see menu clearly with this image
-      splashImage = ../../../../nixos/black.png;
-      theme = "stylish";
-      #theme = "whitesur";
-      #icon = "whitesur";
-      footer = true;
-      screen = "4k";
+      maxGenerations = 5;
+      # limine equivalent of grub's `default = "saved"` (UEFI only)
+      extraConfig = ''
+        remember_last_entry: yes
+      '';
+      # grub found these two with useOSProber; both live on the same ESP as limine
+      extraEntries = ''
+        /Windows
+          protocol: efi
+          path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+
+        /Memtest86+
+          protocol: efi
+          path: boot():/EFI/memtest86/mt86plus.efi
+      '';
+      # what grub.memtest86.enable used to copy to /boot
+      additionalFiles = {
+        "EFI/memtest86/mt86plus.efi" = "${pkgs.memtest86plus}/mt86plus.efi";
+      };
     };
+    efi.canTouchEfiVariables = true;
   };
 
   # neededForBoot flag is not settable from disko
