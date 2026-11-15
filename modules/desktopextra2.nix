@@ -87,7 +87,7 @@
               appId = "com.fender.studio";
               sha256 = "06a082v083q275ycgj5fkz5n84l2q03hyx8405p6bpkh6nvvhnvw";
               bundle = "${pkgs.fetchurl {
-                url = "https://github.com/mio-19/upload/raw/refs/heads/main/fenderstudio.flatpak";
+                url = "https://github.com/mio-aotearoa/upload/raw/refs/heads/main/fenderstudio.flatpak";
                 inherit sha256;
               }}";
             }

@@ -15,7 +15,7 @@
       }:
       {
         imports = [
-          # https://github.com/mio-19/nurpkgs/blob/main/modules/cutefish.nix
+          # https://github.com/mio-aotearoa/nurpkgs/blob/main/modules/cutefish.nix
           inputs.mio.nixosModules.cutefish
         ];
 

@@ -46,7 +46,7 @@
       inputs.home-manager.follows = "home-manager";
     };
     nur = {
-      #url = "github:mio-19/NUR";
+      #url = "github:mio-aotearoa/NUR";
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
@@ -90,11 +90,11 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
     mio = {
-      url = "git+https://github.com/mio-19/nurpkgs.git";
+      url = "git+https://github.com/mio-aotearoa/nurpkgs.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # pin to avoid rebuild
-    mio-betterbird.url = "github:mio-19/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
+    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -105,7 +105,7 @@
       inputs.flake-parts.follows = "flake-parts";
     };
     exo = {
-      url = "github:mio-19/exo";
+      url = "github:mio-aotearoa/exo";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
     # pin niche inputs to avoid bad people taking over.

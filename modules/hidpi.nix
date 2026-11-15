@@ -15,7 +15,7 @@
         # https://github.com/AvaloniaUI/Avalonia/issues/9390#issuecomment-2382126451
         # ryubing/ryujinx: 00:00:00.229 |W| Application GetActualScaleFactor: Couldn't determine monitor DPI: Wayland not yet supported
         environment.sessionVariables.AVALONIA_GLOBAL_SCALE_FACTOR = "2.00";
-        # for https://github.com/mio-19/nurpkgs/blob/66bf4502ae06769827811aecc81ba6c8fd64368c/by-name/bi/bifrost/package.nix#L43
+        # for https://github.com/mio-aotearoa/nurpkgs/blob/66bf4502ae06769827811aecc81ba6c8fd64368c/by-name/bi/bifrost/package.nix#L43
         # but breaks ventoy?
         #environment.sessionVariables.GDK_SCALE = "2";
       };

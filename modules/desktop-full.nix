@@ -563,7 +563,7 @@
                 appId = "io.github.crossplatform.icloud-for-linux";
                 sha256 = "sha256-2MvGVZclrlogqQI317HG0dmodZlQ2iRowyGWrbR9RfI=";
                 bundle = "${pkgs.fetchurl {
-                  url = "https://github.com/mio-19/upload/raw/refs/heads/main/icloud-for-linux.flatpak";
+                  url = "https://github.com/mio-aotearoa/upload/raw/refs/heads/main/icloud-for-linux.flatpak";
                   inherit sha256;
                 }}";
               }

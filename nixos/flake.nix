@@ -51,7 +51,7 @@
       # based on https://github.com/nix-community/home-manager/pull/7074
       # default set to copy, so homemanager inside WSL can kind of manage windows home files!
       # known problem: a lot of hm-backup-* files created
-      url = "git+https://github.com/mio-19/home-manager.git?shallow=1&ref=file-mode";
+      url = "git+https://github.com/mio-aotearoa/home-manager.git?shallow=1&ref=file-mode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay = {
@@ -86,7 +86,7 @@
         inputs.home-manager.follows = "home-manager";
       };
     */
-    #chaotic.url = "git+https://github.com/mio-19/nyx-loner.git";
+    #chaotic.url = "git+https://github.com/mio-aotearoa/nyx-loner.git";
     systems.url = "github:nix-systems/triplet";
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -184,14 +184,14 @@
     razerdaemon = {
       # pin niche inputs to avoid bad people taking over.
       url = "github:JosuGZ/razer-laptop-control/2c224ef0cda712f826056450d89e12c5f7bf3d0d";
-      #url = "git+https://github.com/mio-19/razer-laptop-control.git?shallow=1";
+      #url = "git+https://github.com/mio-aotearoa/razer-laptop-control.git?shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
     stable-diffusion-webui-nix = {
       # pin niche inputs to avoid bad people taking over.
       url = "github:Janrupf/stable-diffusion-webui-nix/034b3e961f9c22a62e97b8c7f5d4698b318c23f8";
-      #url = "github:mio-19/stable-diffusion-webui-nix/patch-1";
+      #url = "github:mio-aotearoa/stable-diffusion-webui-nix/patch-1";
       #inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -208,7 +208,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mio = {
-      url = "github:mio-19/nurpkgs";
+      url = "github:mio-aotearoa/nurpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-style-plymouth = {
@@ -219,7 +219,7 @@
     };
     mac-style-plymouth-b = {
       #url = "github:SergioRibera/s4rchiso-plymouth-theme";
-      url = "github:mio-19/s4rchiso-plymouth-theme/b";
+      url = "github:mio-aotearoa/s4rchiso-plymouth-theme/b";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
@@ -318,7 +318,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     repo = {
-      url = "github:mio-19/repo";
+      url = "github:mio-aotearoa/repo";
       inputs.flake-parts.follows = "flake-parts";
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
@@ -358,7 +358,7 @@
     # pin niche inputs to avoid bad people taking over.
     den.url = "github:denful/den/bf2504f9f2e8621fee091335132ab3ae698cf808";
     # pin to avoid rebuild
-    mio-betterbird.url = "github:mio-19/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
+    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
     chinese-fonts-overlay = {
       # pin niche inputs to avoid bad people taking over.
       url = "github:brsvh/chinese-fonts-overlay/a14d554299d1c8a5f4329a215d4d6217d99bf307";
