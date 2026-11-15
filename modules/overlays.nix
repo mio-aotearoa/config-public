@@ -46,11 +46,8 @@
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
-                polarity
                 rayburst
-                rustdesk
                 sem-cli
-                rustdesk-flutter
                 openshot-qt
                 stuntrally
                 ;
