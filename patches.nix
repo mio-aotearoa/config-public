@@ -18,7 +18,7 @@
   (fetchpatch {
     name = "mesh-llm, mesh-llm-cuda, mesh-llm-rocm, skippy-native-runtime, skippy-native-runtime-vulkan: init at 0.79.0";
     url = "https://github.com/NixOS/nixpkgs/pull/571722.diff";
-    hash = "sha256-iiCwKJVOSBaOR93MjvYarma6MRbDWkrLMBz1lrBdBek=";
+    hash = "sha256-wZ/alySTXCKQ8ZunMt7IQrHrC0fMmQuxPTZRh6DLhg8=";
   })
   /*
     (fetchpatch {
