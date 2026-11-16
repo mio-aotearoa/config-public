@@ -212,6 +212,11 @@ let
           default = false;
           description = "[WIP] skip click/key press to go to passwordenter/fingerprint screen";
         };
+        lockscreen_power_buttons = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Add Restart and Shut Down buttons to the Plasma lockscreen (hiPrio QML overlay)";
+        };
         vicinaeHm.enable = lib.mkOption {
           type = lib.types.bool;
           default = true;
