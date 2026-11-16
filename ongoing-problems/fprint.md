@@ -6,8 +6,13 @@
 ```bash
 journalctl | grep pam_fprintd
 journalctl -u sshd.service -b
+# expect either skip (no pam_fprintd wait) or:
+# pam_exec(sudo:auth): ...-pam-sudo-ssh-bypass failed: exit code 1
 ```
-**Status**: Still open. Bypass lives in `modules/sudo-fprint-ssh-bypass.nix` (works for normal SSH).
+**Root cause**: Bypass used `pam_exec` checking `$SSH_TTY` / `$SSH_CONNECTION` / `$SSH_CLIENT`, but `pam_exec` gets a clean environment (those vars are never set). Observed on fw13: `pam_exec(...pam-sudo-ssh-bypass) failed: exit code 1` then fprintd runs. tmux makes it worse because panes live in `tmux-spawn-*.scope`, not `session-N.scope`, so naive “current tty session” matching also fails.
+**Desired behavior**: Ask fingerprint only for local sessions / local-started tmux. Skip for SSH and SSH-started tmux (logind `Remote=yes` on the invoking process’s session).
+**Fix**: `modules/sudo-fprint-ssh-bypass.nix` walks the sudo client’s parent chain for `session-N.scope` or `XDG_SESSION_ID`, then `loginctl show-session … -p Remote`. Needs rebuild/switch to take effect.
+**Status**: Fix written; verify on fw13 after switch with `sudo -k; sudo true` inside SSH tmux (should password-only) vs local terminal/tmux (fingerprint OK).
 
 ## Issue 2: KDE Plasma Lockscreen Unlock (intermittent after suspend)
 
@@ -85,7 +90,7 @@ journalctl -u fprintd.service -u fprintd-sleep.service -u fprintd-sleep-v2.servi
   * `false`: no Plasma sleep workaround; `fprint_fix` independent.
   * Removed: `"greeter_recycle"` (user-unit sleep hook was invalid — no wired user `sleep.target`, cannot `After=` system `fprintd`).
 * **libfprint USB serial retry patch**: option `fprint_fix` gates `den.aspects.fprint-fix` overlay (`nixos/fprint-fix.patch`, rebased on libfprint 1.94.100 / `wvhulle` kill-without-clean). Required for `fingerprint_rearm`; recommended for `delay_restart` / `delay_restart_v2`.
-* **SSH sudo bypass**: `modules/sudo-fprint-ssh-bypass.nix` (works for normal SSH, fails in tmux — Issue 1).
+* **SSH sudo bypass**: `modules/sudo-fprint-ssh-bypass.nix` (logind `Remote=` via client cgroup / `XDG_SESSION_ID`; Issue 1).
 
 ### Issue 2b: Fingerprint prompt disappears / times out (no suspend involved)
 
