@@ -80,9 +80,11 @@ with _include;
       enable = true;
       maxGenerations = 5;
       # limine equivalent of grub's `default = "saved"` (UEFI only)
+      # mouse/touch + touch-friendly UI: den.aspects.limine-pointer
       extraConfig = ''
         remember_last_entry: yes
       '';
+      style.interface.branding = "fw13";
       # grub found these two with useOSProber; both live on the same ESP as limine
       extraEntries = ''
         /Windows

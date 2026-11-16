@@ -21,6 +21,7 @@
       den.aspects.privacy
       den.aspects.careless
       den.aspects.boot
+      den.aspects.limine-pointer
       #(den.aspects.xrdp)
       #(den.aspects.v3opt) # needs too many time to compile
       #(den.aspects.wheel-nopasswd)
