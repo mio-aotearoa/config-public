@@ -13,6 +13,7 @@ let
     [
       # also available from nixpkgs vscode-extensions. :
       #neveruse#nix-vscode-extensions.vscode-marketplace.scalameta.metals
+      nix-vscode-extensions.vscode-marketplace.leanprover.lean4
       nix-vscode-extensions.vscode-marketplace.rocq-prover.vsrocq
       nix-vscode-extensions.vscode-marketplace.scala-lang.scala
       nix-vscode-extensions.vscode-marketplace.haskell.haskell
