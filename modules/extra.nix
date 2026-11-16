@@ -45,6 +45,7 @@ let
     { pkgs, inputs, ... }:
     with pkgs;
     [
+      elan
       nur.repos.mio.nurl_patched
       autossh
       go
