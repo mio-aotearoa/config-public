@@ -1,6 +1,4 @@
-# DISABLED: fw13 now boots with Limine, see ./default.nix.
-# To roll back: rename this file to grub.nix, import it from ./default.nix and
-# drop the `boot.loader.limine` block there (only one bootloader should be enabled).
+# GRUB bootloader configuration for fw13.
 { ... }:
 {
   boot.loader = {

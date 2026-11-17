@@ -1,0 +1,34 @@
+# DISABLED: fw13 uses GRUB; see ./grub.nix.
+# To restore Limine, replace the grub.nix import in default.nix with this file
+# renamed to limine.nix, and re-enable den.aspects.limine-pointer for fw13.
+{ pkgs, ... }:
+{
+  boot.loader = {
+    timeout = 3;
+    limine = {
+      enable = true;
+      maxGenerations = 5;
+      # limine equivalent of grub's `default = "saved"` (UEFI only)
+      # mouse/touch + touch-friendly UI: den.aspects.limine-pointer
+      extraConfig = ''
+        remember_last_entry: yes
+      '';
+      style.interface.branding = "fw13";
+      # grub found these two with useOSProber; both live on the same ESP as limine
+      extraEntries = ''
+        /Windows
+          protocol: efi
+          path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+
+        /Memtest86+
+          protocol: efi
+          path: boot():/EFI/memtest86/mt86plus.efi
+      '';
+      # what grub.memtest86.enable used to copy to /boot
+      additionalFiles = {
+        "EFI/memtest86/mt86plus.efi" = "${pkgs.memtest86plus}/mt86plus.efi";
+      };
+    };
+    efi.canTouchEfiVariables = true;
+  };
+}

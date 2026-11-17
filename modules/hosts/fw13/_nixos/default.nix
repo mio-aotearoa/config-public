@@ -13,6 +13,7 @@ in
 with _include;
 {
   imports = [
+    ./grub.nix
     inputs.nix-framework-fingerprint-led-blink.nixosModules.default
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     #../betterbird.nix # tired of compiling
@@ -72,36 +73,6 @@ with _include;
   boot.kernelParams = [
     "nohibernate" # no hibernate swap configured
   ];
-
-  boot.loader = {
-    timeout = 3;
-    # previously GRUB: see ./grub.nix.disabled
-    limine = {
-      enable = true;
-      maxGenerations = 5;
-      # limine equivalent of grub's `default = "saved"` (UEFI only)
-      # mouse/touch + touch-friendly UI: den.aspects.limine-pointer
-      extraConfig = ''
-        remember_last_entry: yes
-      '';
-      style.interface.branding = "fw13";
-      # grub found these two with useOSProber; both live on the same ESP as limine
-      extraEntries = ''
-        /Windows
-          protocol: efi
-          path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-
-        /Memtest86+
-          protocol: efi
-          path: boot():/EFI/memtest86/mt86plus.efi
-      '';
-      # what grub.memtest86.enable used to copy to /boot
-      additionalFiles = {
-        "EFI/memtest86/mt86plus.efi" = "${pkgs.memtest86plus}/mt86plus.efi";
-      };
-    };
-    efi.canTouchEfiVariables = true;
-  };
 
   # neededForBoot flag is not settable from disko
   fileSystems = {
