@@ -146,6 +146,7 @@
             experimental-features = [
               "nix-command"
               "flakes"
+              "impure-derivations"
             ]
             ++ lib.optionals (!isLix) [
               "blake3-hashes"
