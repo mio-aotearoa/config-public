@@ -27,8 +27,4 @@
       hash = "sha256-ubCIGJtM1fBr/KzCi2G2zzFi6KohbEkFVv6saUQ3yow=";
     })
   */
-  (fetchpatch {
-    url = "https://github.com/NixOS/nixpkgs/pull/578621.diff";
-    hash = "sha256-gLNZZVA0Qusgb/+zfWqtT2cSc8hZPCTHfH67ibOQeYo=";
-  })
 ]
