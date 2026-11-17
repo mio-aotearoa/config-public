@@ -220,7 +220,6 @@
       den.aspects.thunderbird
       den.aspects.chromium
       den.aspects.desktop-basic
-      den.aspects.toshy
       den.aspects.tkg
       den.aspects.printing
       den.aspects.scan
