@@ -106,6 +106,7 @@
                 uutils-diffutils
                 trayscale
                 ;
+              inherit (pkgs-pin8) blender;
             }
           )
         ];
