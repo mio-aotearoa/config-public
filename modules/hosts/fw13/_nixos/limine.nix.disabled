@@ -1,5 +1,5 @@
-# DISABLED: fw13 uses GRUB; see ./grub.nix.
-# To restore Limine, replace the grub.nix import in default.nix with this file
+# DISABLED: fw13 uses rEFInd; see ./refind.nix (GRUB is in ./grub.nix.disabled).
+# To restore Limine, replace the refind.nix import in default.nix with this file
 # renamed to limine.nix, and re-enable den.aspects.limine-pointer for fw13.
 { pkgs, ... }:
 {

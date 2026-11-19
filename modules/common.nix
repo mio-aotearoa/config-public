@@ -458,6 +458,7 @@
             (
               (config.boot.loader.grub.enable && config.boot.loader.grub.efiSupport)
               || (config.boot.loader.limine.enable && config.boot.loader.limine.efiSupport)
+              || config.boot.loader.refind.enable
             )
             [
               efibootmgr
