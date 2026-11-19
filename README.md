@@ -38,6 +38,12 @@ clean up home-manager
 nix run nixpkgs#home-manager -- expire-generations '-1 hour'
 ```
 
+livecd fixup:
+
+```zsh
+nixos-install  --no-root-password --flake ./nixos#fw13
+```
+
 ## LLM policy
 
 Headache. Use LLM for boring, no-brain tasks. LLM pushed living cost higher? I cannot opt out of the higher living cost by opting out of LLM myself.
