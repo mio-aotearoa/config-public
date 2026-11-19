@@ -25,11 +25,6 @@ If a file starts with `# THIS IS A STUB`, it means that the whole file has been 
 
 <https://gist.github.com/lxl66566/697db0cccd04b7247dc9a0cfb96d328c> <https://github.com/ccicnce113424/nixos-config/blob/main/lib/apply-patches-cow.nix>
 
-```zsh
-wget https://gist.github.com/lxl66566/697db0cccd04b7247dc9a0cfb96d328c/raw/aa9d7fe25bedb3458866ac09bec9718402b5ebea/nixfollows.py
-wget https://github.com/ccicnce113424/nixos-config/raw/refs/heads/main/lib/apply-patches-cow.nix
-```
-
 put custom options in the top level so they are special: nixos modules options usually have multiple levels config.x.y
 
 clean up home-manager
