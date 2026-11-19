@@ -191,6 +191,7 @@ customize
         #"${inputs.mio}/by-name/di/discordchatexporter-desktop_patched/deps.json"
       ];
       allowed = [
+        "proton-cachyos"
         "libwebrtc"
         "kiwix-apple"
         "vscodium"
