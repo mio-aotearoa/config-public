@@ -36,7 +36,7 @@ nix run nixpkgs#home-manager -- expire-generations '-1 hour'
 livecd fixup:
 
 ```zsh
-nixos-install  --no-root-password --flake ./nixos#fw13
+sudo nixos-install  --no-root-password --flake ./nixos#fw13
 ```
 
 ## LLM policy
