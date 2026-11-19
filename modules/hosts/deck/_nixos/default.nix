@@ -12,8 +12,8 @@ let
   compatPaths = lib.makeSearchPathOutput "steamcompattool" "" (
     with pkgs;
     [
-      pkgs-chaotic.proton-cachyos_x86_64_v3
-      pkgs-chaotic.proton-ge-custom
+      pkgs-chaotic.proton-cachyos-bin_edge-bin_x86_64_v3
+      pkgs-chaotic.proton-ge-bin_edge
       steam-play-none
     ]
   );
