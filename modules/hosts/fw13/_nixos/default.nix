@@ -13,7 +13,7 @@ in
 with _include;
 {
   imports = [
-    ./refind.nix
+    ./grub.nix
     inputs.nix-framework-fingerprint-led-blink.nixosModules.default
     inputs.nixos-hardware.nixosModules.common-pc-ssd
     #../betterbird.nix # tired of compiling
