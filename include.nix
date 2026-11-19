@@ -192,6 +192,7 @@ customize
       ];
       allowed = [
         "proton-cachyos"
+        "proton-ge-custom"
         "libwebrtc"
         "kiwix-apple"
         "vscodium"
