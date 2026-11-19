@@ -27,4 +27,9 @@
       hash = "sha256-ubCIGJtM1fBr/KzCi2G2zzFi6KohbEkFVv6saUQ3yow=";
     })
   */
+  (fetchpatch {
+    name = "telegram-desktop: 7.4.3 -> 7.4.4";
+    url = "https://github.com/NixOS/nixpkgs/pull/587822.patch";
+    hash = "sha256-s15ZtF79+ESVA/5wlyVyJNV60KYg3did7uXeMmnLkis=";
+  })
 ]
