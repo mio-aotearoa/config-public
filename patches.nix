@@ -10,15 +10,15 @@
     url = "https://github.com/NixOS/nixpkgs/pull/487895.patch";
     hash = "sha256-q4vOJ2BcNa+K0uWvhzuFvmOV7eVyWnKvD/CY3cGh5XI=";
   })
-  (fetchurl {
+  (fetchpatch {
     name = "flyline: init at 1.9.0";
     url = "https://github.com/NixOS/nixpkgs/pull/538842.patch";
-    hash = "sha256-M2hwE/KpOi9v/sCcXeB7SnXPpqo5aE2E0gkzbzIxvtM=";
+    hash = "sha256-pLZkfWWQ1zRo/i9EGkV6c8vh1CyXRR8HH3u53dEBcvM=";
   })
   (fetchpatch {
-    name = "mesh-llm, mesh-llm-cuda, mesh-llm-rocm, skippy-native-runtime, skippy-native-runtime-vulkan: init at 0.79.0";
+    name = "mesh-llm, skippy-native-runtime: init at 0.80.0";
     url = "https://github.com/NixOS/nixpkgs/pull/571722.diff";
-    hash = "sha256-wZ/alySTXCKQ8ZunMt7IQrHrC0fMmQuxPTZRh6DLhg8=";
+    hash = "sha256-5pmW5KLE/p4C5Do1pfXQ5v8u7+0iZIiohszNDANAtcc=";
   })
   /*
     (fetchpatch {
