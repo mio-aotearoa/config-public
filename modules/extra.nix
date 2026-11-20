@@ -176,6 +176,7 @@ in
               ;
           }
           ++ [
+            pkgs-pin9.nur.repos.mio.ryubing
             mdbook
             nur.repos.mio.mdbook-generate-summary
             uv
@@ -219,10 +220,6 @@ in
             # unsupported on x86_64 macOS:
             tuxguitar
           ]
-          ++ lib.optional (
-            pkgs.stdenv.hostPlatform.isAarch64
-            && inputs.mio.packages.${pkgs.stdenv.hostPlatform.system} ? ryubing
-          ) inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ryubing
           ++ [
             (lib.hiPrio antigravity-cli) # higher prio than gui app for cli command "antigravity"
           ];
