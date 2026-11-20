@@ -15,11 +15,6 @@
     url = "https://github.com/NixOS/nixpkgs/pull/538842.patch";
     hash = "sha256-pLZkfWWQ1zRo/i9EGkV6c8vh1CyXRR8HH3u53dEBcvM=";
   })
-  (fetchpatch {
-    name = "mesh-llm, skippy-native-runtime: init at 0.80.0";
-    url = "https://github.com/NixOS/nixpkgs/pull/571722.diff";
-    hash = "sha256-5pmW5KLE/p4C5Do1pfXQ5v8u7+0iZIiohszNDANAtcc=";
-  })
   /*
     (fetchpatch {
       name = "isabelle: 2025-2 -> 2026";
