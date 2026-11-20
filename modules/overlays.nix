@@ -105,6 +105,7 @@
                 qbittorrent-enhanced
                 uutils-diffutils
                 trayscale
+                nixtamal
                 ;
               inherit (pkgs-pin8) blender;
             }
