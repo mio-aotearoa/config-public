@@ -32,7 +32,7 @@ with _include;
   chaotic.zfs-impermanence-on-shutdown.volume = "${pool}/nixos/local/ephemeral";
 
   #fprintd-plasma_workaround = "fingerprint_rearm";
-  fprintd-plasma_workaround = "delay_restart_v2";
+  #fprintd-plasma_workaround = "delay_restart_v2";
   #fprint_fix = true;
   plasma-login-manager_instead = true; # plm seems to take more seconds to launch, but sddm takes more seconds to enter plasma
 
