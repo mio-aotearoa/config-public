@@ -13,7 +13,7 @@ let
     with pkgs;
     [
       pkgs-chaotic.proton-cachyos-bin_x86_64_v3
-      pkgs-chaotic.proton-ge-custom
+      pkgs-chaotic.proton-ge-bin_edge
       steam-play-none
     ]
   );
