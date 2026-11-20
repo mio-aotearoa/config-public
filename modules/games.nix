@@ -142,7 +142,7 @@
           dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
           localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
           extraCompatPackages = [
-            pkgs-chaotic.proton-cachyos_x86_64_v3
+            pkgs-chaotic.proton-cachyos-bin_x86_64_v3
             pkgs.steam-play-none
             pkgs-chaotic.proton-ge-custom
             #pkgs.luxtorpeda
