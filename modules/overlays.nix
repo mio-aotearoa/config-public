@@ -108,6 +108,7 @@
                 nixtamal
                 ;
               inherit (pkgs-pin8) blender;
+              inherit (pkgs-pin9) downkyicore;
             }
           )
         ];
