@@ -399,11 +399,6 @@
             # PR .patch URLs track branch head, so the hash changes when the PR is updated.
             # That is intentional: a hash mismatch surfaces PR updates at rebuild time.
             patches = (callPackage ../patches.nix { }) ++ [
-              (fetchpatch {
-                name = "telegram-desktop: 7.4.3 -> 7.4.4 (#587822)";
-                url = "https://github.com/NixOS/nixpkgs/commit/d55717c2185703b86bd778ab9fd6265e3d2627ab.diff";
-                hash = "sha256-s15ZtF79+ESVA/5wlyVyJNV60KYg3did7uXeMmnLkis=";
-              })
               # to consider:
               # maven: provide default plugins per Maven version to buildMavenPackage https://github.com/NixOS/nixpkgs/pull/527061
               /*
