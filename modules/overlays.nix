@@ -113,6 +113,7 @@
                 famistudio
                 remmina
                 wordcraft
+                rectangle
                 ;
             }
           )
