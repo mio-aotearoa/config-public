@@ -441,11 +441,13 @@
                   hash = "sha256-H4NMS9eDsJ1zM6gLQdZtyyBYumjKArrCFDcWeE+IOJQ=";
                 })
               */
-              (fetchpatch {
-                name = "nixos/btrfs: add services.btrfs.autoReclaim option";
-                url = "https://github.com/NixOS/nixpkgs/pull/527555.patch";
-                hash = "sha256-QAnG7lVV3zwpHyraSwGVOKK62gxGvECvKSXSKpdpw5w=";
-              })
+              /*
+                (fetchpatch {
+                  name = "nixos/btrfs: add services.btrfs.autoReclaim option";
+                  url = "https://github.com/NixOS/nixpkgs/pull/527555.patch";
+                  hash = "sha256-QAnG7lVV3zwpHyraSwGVOKK62gxGvECvKSXSKpdpw5w=";
+                })
+              */
               (fetchpatch {
                 name = "nixos/bash: Reset title bar only for interactive shells";
                 url = "https://github.com/NixOS/nixpkgs/pull/521688.patch";

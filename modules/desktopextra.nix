@@ -7,7 +7,12 @@
       den.aspects.games
     ];
     os =
-      args@{ pkgs, inputs, _include, ... }:
+      args@{
+        pkgs,
+        inputs,
+        _include,
+        ...
+      }:
       with _include;
       {
         environment.systemPackages = with pkgs; [
