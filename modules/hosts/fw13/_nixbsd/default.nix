@@ -49,9 +49,10 @@ in
       fsType = "zfs";
     };
 
-    # Shared /nix store with Linux
+    # Keep the store and /nix/var (database, profiles, GC roots) BSD-local.
+    # Only the pool is shared with Linux, not the Nix installation.
     fileSystems."/nix" = {
-      device = "${pool}/nixos/local/nix";
+      device = "${pool}/nixbsd/nix";
       fsType = "zfs";
       options = [ "noatime" ];
     };
