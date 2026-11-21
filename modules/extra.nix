@@ -57,6 +57,7 @@ let
       #github-copilot-cli
       #nur.repos.mio.freebuff
       agent-browser
+      officecli
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       dsh
