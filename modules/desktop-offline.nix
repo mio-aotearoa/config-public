@@ -133,6 +133,7 @@
         systemPackages_hardened =
           with pkgs;
           [
+            kelivo
             ladybird
             #gnome-online-accounts-gtk
             #gnome-calendar
