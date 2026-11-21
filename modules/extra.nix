@@ -179,7 +179,7 @@ in
               ;
           }
           ++ [
-            pkgs-pin9.nur.repos.mio.ryubing
+            nur.repos.mio.ryubing
             mdbook
             nur.repos.mio.mdbook-generate-summary
             uv
