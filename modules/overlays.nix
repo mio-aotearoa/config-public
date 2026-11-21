@@ -108,7 +108,7 @@
                 nixtamal
                 ;
               inherit (pkgs-pin8) blender;
-              inherit (pkgs-pin9) downkyicore famistudio remmina;
+              inherit (pkgs-pin9) downkyicore famistudio remmina wordcraft;
             }
           )
         ];
