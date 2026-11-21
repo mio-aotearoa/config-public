@@ -100,7 +100,6 @@
               raycast = mio.raycast_macos15;
               inherit (mio.patched)
                 vscodium
-                jadx
                 starship
                 qbittorrent-enhanced
                 uutils-diffutils
