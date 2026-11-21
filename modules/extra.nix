@@ -56,11 +56,11 @@ let
       opencode
       #github-copilot-cli
       #nur.repos.mio.freebuff
+      agent-browser
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       dsh
       reasonix
-      agent-browser
     ]);
 
   commonCliDarwin = args: commonCliHardened args ++ commonCliClean args;
