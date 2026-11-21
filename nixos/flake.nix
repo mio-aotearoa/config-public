@@ -358,8 +358,7 @@
     # pin to avoid rebuild
     mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
     chinese-fonts-overlay = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:brsvh/chinese-fonts-overlay/a14d554299d1c8a5f4329a215d4d6217d99bf307";
+      url = "github:brsvh/chinese-fonts-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     apple-fonts = {

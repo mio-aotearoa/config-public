@@ -116,8 +116,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chinese-fonts-overlay = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:brsvh/chinese-fonts-overlay/a14d554299d1c8a5f4329a215d4d6217d99bf307";
+      url = "github:brsvh/chinese-fonts-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
