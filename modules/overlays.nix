@@ -108,11 +108,8 @@
                 nixtamal
                 ;
               inherit (pkgs-pin9)
-                downkyicore
-                famistudio
                 remmina
                 wordcraft
-                rectangle
                 ;
             }
           )
