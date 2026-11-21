@@ -111,8 +111,7 @@
     import-tree.url = "github:denful/import-tree";
     den.url = "github:denful/den";
     apple-fonts = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:Lyndeno/apple-fonts.nix/3861e2249cb244bfbc7cfab2303c152cf5f9d9e9";
+      url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chinese-fonts-overlay = {
