@@ -16,8 +16,8 @@
             else
               (import ../nixos/include.nix args)
           );
-        inherit (_include) progs;
       in
+      with _include;
       {
         environment.systemPackages = with pkgs; [
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-bin
