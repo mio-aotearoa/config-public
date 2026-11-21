@@ -124,6 +124,7 @@ in
             #claude-code
             distrobox
             gcc
+            nur.repos.mio.zfs-dedup
           ];
         environment.systemPackages = with pkgs; [
           antigravity-cli
