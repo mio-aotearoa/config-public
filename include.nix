@@ -52,6 +52,7 @@ customize
   allowUnfreeNonSourcePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
+      "chatgpt-primary-runtime"
       "reaper"
       "firefox-esr-140-bin-unwrapped"
       "libnvvm"
