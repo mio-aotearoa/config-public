@@ -39,7 +39,12 @@
           cadcraft
           #lightcraft
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.chatbox
-          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.archivetune
+          (
+            if pkgs.stdenv.hostPlatform.isDarwin then
+              pkgs-pin9.nur.repos.mio
+            else
+              inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.archivetune
+          )
           progs.bifrost
           downkyicore
           ghidra
