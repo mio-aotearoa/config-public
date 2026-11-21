@@ -7,16 +7,7 @@
       den.aspects.games
     ];
     os =
-      args@{ pkgs, inputs, ... }:
-      let
-        _include =
-          args._include or (
-            if pkgs.stdenv.hostPlatform.isDarwin then
-              (import ../mac/include.nix args)
-            else
-              (import ../nixos/include.nix args)
-          );
-      in
+      args@{ pkgs, inputs, _include, ... }:
       with _include;
       {
         environment.systemPackages = with pkgs; [
