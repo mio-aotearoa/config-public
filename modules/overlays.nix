@@ -97,7 +97,6 @@
               mio = inputs.mio.legacyPackages."${pkgs.stdenv.hostPlatform.system}";
             in
             {
-              raycast = mio.raycast_macos15;
               inherit (mio.patched)
                 vscodium
                 starship
