@@ -45,7 +45,9 @@ let
     { pkgs, inputs, ... }:
     with pkgs;
     [
-      elan
+      (pkgs.lib.hiPrio elan)
+      lean4
+      agda
       nur.repos.mio.nurl_patched
       autossh
       go
@@ -100,8 +102,6 @@ in
             (maven.override { jdk_headless = progs.jdk_headless; })
             (ammonite.override { jre = progs.jre; })
             progs.jdk
-            agda
-            lean4
             yarn-berry
             update-nix-fetchgit
             gnumake
