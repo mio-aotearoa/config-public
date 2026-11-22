@@ -14,11 +14,24 @@
         backport = pkgs.runCommand "zfs-2.4.4-fideduperange.patch" { } ''
           ${pkgs.buildPackages.patch}/bin/patch --output="$out" ${upstream} < ${./_zfs-fideduperange/zfs-2.4.4.patch.patch}
         '';
+        tests = pkgs.fetchurl {
+          name = "ZTS-Add-FIDEDUPERANGE-tests.patch";
+          url = "https://github.com/openzfs/zfs/commit/6904037d7dab4efe118fade6a67e8b935617bf09.patch";
+          hash = "sha256-TbYDBdvgk0MyfzbbpLz0EMfrX+WdTUNiDwoWiQFFWuA=";
+        };
+        patchedModule = zfsModule.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [
+            backport
+            tests
+          ];
+        });
       in
       {
-        boot.zfs.modulePackage = zfsModule.overrideAttrs (old: {
-          patches = (old.patches or [ ]) ++ [ backport ];
-        });
+        boot.zfs.modulePackage = patchedModule;
+        system.build.zfsFideduperangeTestSource = pkgs.applyPatches {
+          name = "zfs-${patchedModule.version}-fideduperange-test-source";
+          inherit (patchedModule) src patches;
+        };
       };
   };
 }
