@@ -1,5 +1,7 @@
 # Shared authorized SSH keys for every Den-managed OS user (NixOS + nix-darwin).
 # Per-user keys use a unique aspect identity (fleet-demo ssh-keys pattern).
+# Use the `user` class for account settings so they reach the host without
+# den.batteries.user-aspects (den #694 / user-host-content migration).
 { ... }:
 let
   keys = import ../sshkeys.nix;
@@ -13,8 +15,7 @@ in
         { host, user }:
         {
           name = "sshkeys/${user.userName}@${host.name}";
-          nixos.users.users.${user.userName}.openssh.authorizedKeys.keys = keys;
-          darwin.users.users.${user.userName}.openssh.authorizedKeys.keys = keys;
+          user.openssh.authorizedKeys.keys = keys;
         }
       )
     ];

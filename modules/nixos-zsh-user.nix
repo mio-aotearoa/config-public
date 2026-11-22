@@ -1,5 +1,7 @@
 # NixOS login shell zsh with home-manager zsh; disables system programs.zsh on affected hosts.
 # Opt in per user via users.<name>.nixosZshUser.enable = true (NixOS hosts only).
+# Account fields use the `user` class; host-wide programs.zsh goes through
+# provides.to-hosts so it survives den #694 without user-aspects.
 { den, lib, ... }:
 {
   den.aspects.nixos-zsh-user = {
@@ -10,15 +12,13 @@
         {
           name = "nixos-zsh-user/${user.userName}@${host.name}";
           homeManager.programs.zsh.enable = true;
-          nixos =
+          user =
             { pkgs, ... }:
             {
-              users.users.${user.userName} = {
-                shell = pkgs.zsh;
-                ignoreShellProgramCheck = true; # https://github.com/nix-community/home-manager/issues/108#issuecomment-2569823607
-              };
-              programs.zsh.enable = lib.mkForce false;
+              shell = pkgs.zsh;
+              ignoreShellProgramCheck = true; # https://github.com/nix-community/home-manager/issues/108#issuecomment-2569823607
             };
+          provides.to-hosts.nixos.programs.zsh.enable = lib.mkForce false;
         }
       )
     ];
