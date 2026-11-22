@@ -298,7 +298,7 @@
           "openzfs" # or manually upgrade with https://github.com/openzfsonosx/openzfs-fork/releases
           "betterdisplay"
           "balenaetcher"
-          "microsoft-edge"
+          #"microsoft-edge"
           "cleanshot"
           "cloudflare-warp"
           "utm"
