@@ -1,0 +1,304 @@
+--- upstream.patch
++++ upstream.patch
+@@ -265,20 +265,21 @@
+  }
+  #endif /* HAVE_VFS_DEDUPE_FILE_RANGE */
+ diff --git a/module/zfs/zfs_vnops.c b/module/zfs/zfs_vnops.c
+-index ad00128ea538..c40e0053b755 100644
++index e773ea1..2eee2c7 100644
+ --- a/module/zfs/zfs_vnops.c
+ +++ b/module/zfs/zfs_vnops.c
+-@@ -42,7 +42,9 @@
++@@ -52,7 +52,10 @@
+  #include <sys/dsl_crypt.h>
+  #include <sys/dsl_dataset.h>
+  #include <sys/spa.h>
+ +#include <sys/zio_checksum.h>
+  #include <sys/txg.h>
+ +#include <sys/blkptr.h>
+- #include <sys/brt.h>
+++#include <sys/brt.h>
+  #include <sys/dbuf.h>
+  #include <sys/policy.h>
+-@@ -1577,77 +1579,32 @@ zfs_exit_two(zfsvfs_t *zfsvfs1, zfsvfs_t *zfsvfs2, const char *tag)
++ #include <sys/zfeature.h>
++@@ -1555,77 +1558,32 @@ zfs_exit_two(zfsvfs_t *zfsvfs1, zfsvfs_t *zfsvfs2, const char *tag)
+  }
+  
+  /*
+@@ -317,7 +318,7 @@
+ +	objset_t	*outos = outzfsvfs->z_os;
+  	int		error;
+ -	int		count = 0;
+--	sa_bulk_attr_t	bulk[5];
++-	sa_bulk_attr_t	bulk[3];
+ -	uint64_t	mtime[2], ctime[2];
+ -	uint64_t	uid, gid, projid;
+ -	blkptr_t	*bps;
+@@ -367,7 +368,7 @@
+  
+  	ASSERT(!outzfsvfs->z_replay);
+  
+-@@ -1655,20 +1612,16 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1633,99 +1591,72 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  	 * Block cloning from an unencrypted dataset into an encrypted
+  	 * dataset and vice versa is not supported.
+  	 */
+@@ -385,18 +386,6 @@
+ -	    !dmu_objset_crypto_key_equal(inos, outos)) {
+ -		zfs_exit_two(inzfsvfs, outzfsvfs, FTAG);
+ +	    !dmu_objset_crypto_key_equal(inos, outos))
+- 		return (SET_ERROR(EXDEV));
+--	}
+- 
+- 	/*
+- 	 * Cloning between datasets with different properties is possible,
+-@@ -1680,89 +1633,64 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+- 	    (inos->os_checksum != outos->os_checksum ||
+- 	    inos->os_compress != outos->os_compress ||
+- 	    inos->os_copies != outos->os_copies ||
+--	    inos->os_dedup_checksum != outos->os_dedup_checksum)) {
+--		zfs_exit_two(inzfsvfs, outzfsvfs, FTAG);
+-+	    inos->os_dedup_checksum != outos->os_dedup_checksum))
+  		return (SET_ERROR(EXDEV));
+ -	}
+  
+@@ -496,7 +485,7 @@
+ +	uint64_t	outsize, size;
+ +	int		error = 0;
+ +	int		count = 0;
+-+	sa_bulk_attr_t	bulk[5];
+++	sa_bulk_attr_t	bulk[3];
+ +	uint64_t	mtime[2], ctime[2];
+ +	uint64_t	uid, gid, projid;
+ +	blkptr_t	*bps;
+@@ -523,17 +512,7 @@
+  
+  	inblksz = inzp->z_blksz;
+  
+-@@ -1780,8 +1708,7 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+- 			if (min_smallblk < inblksz &&
+- 			    (inos->os_compress != ZIO_COMPRESS_OFF ||
+- 			    max_smallblk >= inblksz)) {
+--				error = SET_ERROR(EXDEV);
+--				goto unlock;
+-+				return (SET_ERROR(EXDEV));
+- 			}
+- 		}
+- 	}
+-@@ -1793,40 +1720,30 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1736,40 +1667,30 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  	 * grow to fail, but we cover what we can before opening transaction
+  	 * and the rest detect after we try to do it.
+  	 */
+@@ -584,7 +563,7 @@
+  
+  	/*
+  	 * If we are copying only one block and it is smaller than recordsize
+-@@ -1836,34 +1753,37 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1779,29 +1700,25 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  	 * matter how big the destination grow later.
+  	 */
+  	if (len <= inblksz && inblksz < outzfsvfs->z_max_blksz &&
+@@ -615,18 +594,6 @@
+ -	    &ctime, 16);
+ -	SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_SIZE(outzfsvfs), NULL,
+ -	    &outzp->z_size, 8);
+--	SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_FLAGS(outzfsvfs), NULL,
+--	    &outzp->z_pflags, 8);
+--	if (outzp->z_is_sa)
+--		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_SEQ(outzfsvfs), NULL,
+--		    &outzp->z_seq, 8);
+-+	/*
+-+	 * A dedupe leaves the destination's content and metadata alone: it can
+-+	 * only replace blocks with identical ones.  The times must not move,
+-+	 * and size, flags and seq cannot change either - a dedupe never extends
+-+	 * the file, never clears setid bits and never bumps z_seq - so there is
+-+	 * nothing to write back at all.
+-+	 */
+ +	if (!dedup) {
+ +		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_MTIME(outzfsvfs), NULL,
+ +		    &mtime, 16);
+@@ -634,18 +601,13 @@
+ +		    &ctime, 16);
+ +		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_SIZE(outzfsvfs), NULL,
+ +		    &outzp->z_size, 8);
+-+		SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_FLAGS(outzfsvfs), NULL,
+-+		    &outzp->z_pflags, 8);
+-+		if (outzp->z_is_sa)
+-+			SA_ADD_BULK_ATTR(bulk, count, SA_ZPL_SEQ(outzfsvfs),
+-+			    NULL, &outzp->z_seq, 8);
+ +	}
+  
+ -	zilog = outzfsvfs->z_log;
+  	maxblocks = zil_max_log_data(zilog, sizeof (lr_clone_range_t)) /
+  	    sizeof (bps[0]);
+  
+-@@ -1903,8 +1823,12 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1841,8 +1758,12 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  			 * EAGAIN here.  Based on zfs_bclone_wait_dirty either
+  			 * return a shortened range to the caller so it can
+  			 * fallback, or wait for the next TXG and check again.
+@@ -659,7 +621,7 @@
+  				txg_wait_flag_t wait_flags =
+  				    spa_get_failmode(dmu_objset_spa(inos)) ==
+  				    ZIO_FAILURE_MODE_CONTINUE ?
+-@@ -1972,31 +1896,67 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1910,28 +1831,64 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  			break;
+  		}
+  
+@@ -685,8 +647,6 @@
+ +			    &clear_setid_bits_txg, tx);
+  
+ -		zfs_tstamp_update_setup(outzp, CONTENT_MODIFIED, mtime, ctime);
+--		if (outzp->z_is_sa)
+--			outzp->z_has_seq = B_TRUE;
+ +			zfs_tstamp_update_setup(outzp, CONTENT_MODIFIED, mtime,
+ +			    ctime);
+  
+@@ -697,9 +657,6 @@
+ -		while ((outsize = outzp->z_size) < outoff + size) {
+ -			(void) atomic_cas_64(&outzp->z_size, outsize,
+ -			    outoff + size);
+-+			if (outzp->z_is_sa)
+-+				outzp->z_has_seq = B_TRUE;
+-+
+ +			/*
+ +			 * Update the file size (zp_size) if it has changed;
+ +			 * account for possible concurrent updates.
+@@ -713,7 +670,6 @@
+ +			ASSERT3U(outoff + size, <=, outzp->z_size);
+  		}
+  
+--		ASSERT3S(count, <=, ARRAY_SIZE(bulk));
+ -		error = sa_bulk_update(outzp->z_sa_hdl, bulk, count, tx);
+ +		if (count > 0) {
+ +			ASSERT3S(count, <=, ARRAY_SIZE(bulk));
+@@ -744,24 +700,16 @@
+  
+  		dmu_tx_commit(tx);
+  
+-@@ -2017,33 +1977,867 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
++@@ -1952,7 +1909,127 @@ zfs_clone_range(znode_t *inzp, uint64_t *inoffp, znode_t *outzp,
+  	vmem_free(bps, sizeof (bps[0]) * maxblocks);
+  	zfs_znode_update_vfs(outzp);
+  
+ -unlock:
+--	zfs_rangelock_exit(outlr);
+--	zfs_rangelock_exit(inlr);
+ +	*donep = done;
+- 
+--	if (done > 0) {
+--		/*
+--		 * If we have made at least partial progress, reset the error.
+--		 */
+--		error = 0;
+++
+ +	return (error);
+ +}
+- 
+--		ZFS_ACCESSTIME_STAMP(inzfsvfs, inzp);
+++
+ +/*
+ + * Clone part of inzp file into outzp file. This must be done under range locks
+ + * held on both files so as to prevent it from being modified while the clone
+@@ -794,10 +742,7 @@
+ +	uint64_t	len = *lenp;
+ +	uint64_t	done = 0;
+ +	int		error;
+- 
+--		if (outos->os_sync == ZFS_SYNC_ALWAYS) {
+--			error = zil_commit(zilog, outzp->z_id);
+--		}
+++
+ +	/*
+ +	 * We need to call zfs_enter() potentially on two different datasets,
+ +	 * so we need a dedicated function for that.
+@@ -805,16 +750,7 @@
+ +	error = zfs_enter_two(inzfsvfs, outzfsvfs, FTAG);
+ +	if (error != 0)
+ +		return (error);
+- 
+--		*inoffp += done;
+--		*outoffp += done;
+--		*lenp = done;
+--	} else {
+--		/*
+--		 * If we made no progress, there must be a good reason.
+--		 * EOF is handled explicitly above, before the loop.
+--		 */
+--		ASSERT3S(error, !=, 0);
+++
+ +	/*
+ +	 * Read z_log only after entering, so a suspend/resume (rollback,
+ +	 * zfs receive -F) cannot leave us with a stale or freed zilog.
+@@ -866,8 +802,8 @@
+ +			error = SET_ERROR(EINVAL);
+ +			goto out;
+ +		}
+- 	}
+- 
+++	}
+++
+ +	/* Flush any mmap()'d data to disk */
+ +	if (zn_has_cached_data(inzp, inoff, inoff + len - 1))
+ +		zn_flush_cached_data(inzp, B_TRUE);
+@@ -890,31 +826,24 @@
+ +	error = zfs_clone_range_locked(inzp, inoff, outzp, outoff, len, cr,
+ +	    outlr, B_FALSE, &done);
+ +
+-+	zfs_rangelock_exit(outlr);
+-+	zfs_rangelock_exit(inlr);
+-+
+-+	if (done > 0) {
+-+		/*
+-+		 * If we have made at least partial progress, reset the error.
+-+		 */
+-+		error = 0;
+-+
+-+		ZFS_ACCESSTIME_STAMP(inzfsvfs, inzp);
+-+
++ 	zfs_rangelock_exit(outlr);
++ 	zfs_rangelock_exit(inlr);
++ 
++@@ -1964,9 +2041,8 @@ unlock:
++ 
++ 		ZFS_ACCESSTIME_STAMP(inzfsvfs, inzp);
++ 
++-		if (outos->os_sync == ZFS_SYNC_ALWAYS) {
+ +		if (outzfsvfs->z_os->os_sync == ZFS_SYNC_ALWAYS)
+-+			error = zil_commit(zilog, outzp->z_id);
+-+
+-+		*inoffp += done;
+-+		*outoffp += done;
+-+		*lenp = done;
+-+	} else {
+-+		/*
+-+		 * If we made no progress, there must be a good reason.
+-+		 * EOF is handled explicitly above, before the loop.
+-+		 */
+-+		ASSERT3S(error, !=, 0);
+-+	}
+-+
++ 			error = zil_commit(zilog, outzp->z_id);
++-		}
++ 
++ 		*inoffp += done;
++ 		*outoffp += done;
++@@ -1979,6 +2055,721 @@ unlock:
++ 		ASSERT3S(error, !=, 0);
++ 	}
++ 
+ +out:
+ +	zfs_exit_two(inzfsvfs, outzfsvfs, FTAG);
+ +
+@@ -1633,7 +1562,7 @@
+  	zfs_exit_two(inzfsvfs, outzfsvfs, FTAG);
+  
+  	return (error);
+-@@ -2160,6 +2954,7 @@ EXPORT_SYMBOL(zfs_getsecattr);
++@@ -2092,6 +2883,7 @@ EXPORT_SYMBOL(zfs_getsecattr);
+  EXPORT_SYMBOL(zfs_setsecattr);
+  EXPORT_SYMBOL(zfs_clone_range);
+  EXPORT_SYMBOL(zfs_clone_range_replay);
