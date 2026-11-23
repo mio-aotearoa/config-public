@@ -247,6 +247,7 @@
         environment.systemPackages = with pkgs; [
           #nur.repos.mio.telegram-mac
           #nur.repos.mio.mac-apk
+          nur.repos.mio.onlyswitch
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -305,7 +306,7 @@
           "cloudflare-warp"
           "utm"
           #"chatgpt"
-          "only-switch"
+          #"only-switch"
           "zulip"
           #"raycast"
           "orbstack"
