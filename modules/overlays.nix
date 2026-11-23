@@ -26,6 +26,7 @@
       in
       with _include;
       {
+        programs.darling.package = inputs.mio.legacyPackages."${system}".patched.darling;
         nixpkgs.overlays = [
           inputs.nur.overlays.default
           #inputs.copyparty.overlays.default
@@ -41,7 +42,6 @@
               inherit (mio) wireguird miodroid;
               inherit (mio.patched)
                 vscodium
-                darling
                 grub2
                 starship
                 sniffnet
