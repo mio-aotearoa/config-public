@@ -11,9 +11,9 @@
     hash = "sha256-q4vOJ2BcNa+K0uWvhzuFvmOV7eVyWnKvD/CY3cGh5XI=";
   })
   (fetchpatch {
-    name = "flyline: init at 1.9.0";
-    url = "https://github.com/NixOS/nixpkgs/pull/538842.patch";
-    hash = "sha256-pLZkfWWQ1zRo/i9EGkV6c8vh1CyXRR8HH3u53dEBcvM=";
+    name = "flyline: init at 1.11.0";
+    url = "https://github.com/NixOS/nixpkgs/pull/538842.diff";
+    hash = "sha256-x8NW+7+cNYHVj9FzUyRoCH7IdFJr7L7snd7R/h0rMvs=";
   })
   (fetchpatch {
     name = "{libisofs,libburn,libisoburn}: adopt, modernize, cleanup";
