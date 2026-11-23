@@ -356,7 +356,7 @@
     import-tree.url = "github:denful/import-tree";
     den.url = "github:denful/den";
     # pin to avoid rebuild
-    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
+    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/b9bc8e50ebb9811dd09aa2ced1ed38a92cc70051";
     chinese-fonts-overlay = {
       url = "github:brsvh/chinese-fonts-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
