@@ -62,6 +62,10 @@
           chatgpt
           reaper
         ];
+        systemPackages_clean = with pkgs; [
+          # unfree:
+          #(if pkgs.stdenv.hostPlatform.isLinux then antigravity-ide-fhs else antigravity-ide)
+        ];
       };
     nixos =
       args@{
@@ -122,7 +126,6 @@
         systemPackages_clean = with pkgs; [
           # unfree:
           android-studio
-          antigravity-ide-fhs
           # DETAILS REMOVED
         ];
 
@@ -265,9 +268,8 @@
           # unfree:
           #zoom-us # recording scrren permission problems. use homebrew version then
           #jetbrains.clion
-          antigravity-ide
           #code-cursor # in app updater, better with cask.
-          slack
+          #slack
         ];
 
         homebrew.casks = [
@@ -299,7 +301,7 @@
           "betterdisplay"
           "balenaetcher"
           #"microsoft-edge"
-          "cleanshot"
+          #"cleanshot"
           "cloudflare-warp"
           "utm"
           #"chatgpt"
