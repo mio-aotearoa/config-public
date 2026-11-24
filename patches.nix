@@ -20,10 +20,12 @@
     url = "https://github.com/NixOS/nixpkgs/pull/589558.patch";
     hash = "sha256-/clnXuYh7j0er4yxCgFW3lZ1K8NL08YCuEXIXOrvhM0=";
   })
-  (fetchpatch {
-    # https://github.com/NixOS/nixpkgs/pull/579996#issuecomment-6856710631
-    name = "isabelle: 2025-2 -> 2026";
-    url = "https://github.com/NixOS/nixpkgs/compare/master...srghma:nixpkgs:isabelle-2026-test.diff";
-    hash = "sha256-z2D7DCUq7JOtZHlnDIhg+vcoDdxsdkUUjzydWs+ZC5o=";
-  })
+  /*
+    (fetchpatch {
+      # https://github.com/NixOS/nixpkgs/pull/579996#issuecomment-6856710631
+      name = "isabelle: 2025-2 -> 2026";
+      url = "https://github.com/NixOS/nixpkgs/compare/master...srghma:nixpkgs:isabelle-2026-test.diff";
+      hash = "sha256-z2D7DCUq7JOtZHlnDIhg+vcoDdxsdkUUjzydWs+ZC5o=";
+    })
+  */
 ]
