@@ -244,6 +244,7 @@
           #nur.repos.mio.mac-apk
           nur.repos.mio.onlyswitch
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
