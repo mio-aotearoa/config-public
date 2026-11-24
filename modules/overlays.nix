@@ -105,7 +105,6 @@
                 nixtamal
                 comaps
                 remmina
-                baobab
                 evince
                 ;
             }
