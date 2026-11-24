@@ -20,6 +20,7 @@
         ];
 
         systemPackages_hardened = with pkgs; [
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.serein
           progs.inkscape
           cyberchef
           comaps
