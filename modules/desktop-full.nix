@@ -428,7 +428,7 @@
               profile = "${pkgs.firejail}/etc/firejail/gnome-calculator.profile";
             };
             gnome-clocks = {
-              executable = "${hardenedPkg gnome-clocks}/bin/gnome-clocks";
+              executable = "${hardestPkg gnome-clocks}/bin/gnome-clocks";
               profile = "${pkgs.firejail}/etc/firejail/gnome-clocks.profile";
             };
             # https://github.com/librephoenix/nixos-config/blob/0c3b676ab9d3e93780f06dbe5e084048eeed9a32/modules/system/security/firejail/default.nix#L21
