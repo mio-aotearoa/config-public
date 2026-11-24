@@ -243,6 +243,7 @@
           #nur.repos.mio.telegram-mac
           #nur.repos.mio.mac-apk
           nur.repos.mio.onlyswitch
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -289,7 +290,7 @@
           "steam"
           "microsoft-office"
           "microsoft-auto-update"
-          "electerm"
+          #"electerm"
           #"chromium"
           "calibre"
           "prismlauncher"
