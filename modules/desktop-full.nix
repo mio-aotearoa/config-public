@@ -378,7 +378,7 @@
             # https://nixos.wiki/wiki/Steam
             (lib.hiPrio config.programs.steam.package.run) # override the non cleanPkg one
           ];
-        programs.localsend.package = hardenedPkg pkgs.localsend;
+        programs.localsend.package = hardestPkg pkgs.localsend;
 
         programs.onlyoffice.enable = true; # maybe open source but from binary
 
