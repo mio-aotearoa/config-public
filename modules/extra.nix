@@ -179,7 +179,7 @@ in
               ;
           }
           ++ [
-            nur.repos.mio.ryubing
+            inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ryubing_patched
             mdbook
             nur.repos.mio.mdbook-generate-summary
             uv
