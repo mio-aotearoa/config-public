@@ -107,7 +107,6 @@
                 ;
               inherit (pkgs-pin9)
                 remmina
-                wordcraft
                 ;
             }
           )
