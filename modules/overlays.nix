@@ -43,7 +43,7 @@
               inherit (mio.patched)
                 vscodium
                 grub2
-                starship
+                # starship
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
@@ -99,7 +99,7 @@
             {
               inherit (mio.patched)
                 vscodium
-                starship
+                # starship
                 qbittorrent-enhanced
                 uutils-diffutils
                 trayscale
