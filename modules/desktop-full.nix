@@ -268,10 +268,12 @@
       in
       with _include;
       {
+        systemPackages_hardest = with pkgs; [
+          kiwix
+        ];
         systemPackages_hardened =
           with pkgs;
           [
-            kiwix
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.uplink
             simple-scan
             (wrapPrio gnome-calculator)
