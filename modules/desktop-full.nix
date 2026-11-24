@@ -591,6 +591,7 @@
         environment.systemPackages = with pkgs; [
           #kiwix-apple
           nur.repos.mio.kiwix_patched
+          nur.repos.mio.launchnext
           nur.repos.mio.launchy
         ];
         homebrew.casks = [
