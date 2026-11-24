@@ -186,7 +186,7 @@
         #programs.gamemode.enable = true;
       };
     darwin =
-      { pkgs, ... }:
+      { inputs, pkgs, ... }:
       {
         environment.systemPackages = with pkgs; [
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ryubing_patched
