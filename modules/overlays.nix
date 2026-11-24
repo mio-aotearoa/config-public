@@ -104,8 +104,6 @@
                 trayscale
                 nixtamal
                 comaps
-                ;
-              inherit (pkgs-pin9)
                 remmina
                 ;
             }
