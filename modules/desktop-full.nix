@@ -589,8 +589,8 @@
       with _include;
       {
         environment.systemPackages = with pkgs; [
-          #kiwix-apple
           nur.repos.mio.kiwix_patched
+          nur.repos.mio.kiwix-apple
           nur.repos.mio.launchnext
           nur.repos.mio.launchy
         ];
