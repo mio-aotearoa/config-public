@@ -268,10 +268,19 @@
       in
       with _include;
       {
+        systemPackages_hardest = with pkgs; [
+          kiwix
+          #bottles
+          #kdePackages.sddm-kcm
+          kdePackages.kweather
+          (wrapPrio gnome-clocks)
+          #ventoy-full
+          #ventoy-full-qt # qt version looks broken under kde plasma
+          ventoy-full-gtk
+        ];
         systemPackages_hardened =
           with pkgs;
           [
-            kiwix
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.uplink
             simple-scan
             (wrapPrio gnome-calculator)
@@ -287,13 +296,6 @@
             progs.zulip
             normcap
             (if qtIsPreferred then libreoffice-qt-stable else libreoffice-stable)
-            #bottles
-            #kdePackages.sddm-kcm
-            kdePackages.kweather
-            (wrapPrio gnome-clocks)
-            #ventoy-full
-            #ventoy-full-qt # qt version looks broken under kde plasma
-            ventoy-full-gtk
             nextcloud-client
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.prospect-mail
             nur.repos.mio.icloud-mail
@@ -376,7 +378,7 @@
             # https://nixos.wiki/wiki/Steam
             (lib.hiPrio config.programs.steam.package.run) # override the non cleanPkg one
           ];
-        programs.localsend.package = hardenedPkg pkgs.localsend;
+        programs.localsend.package = hardestPkg pkgs.localsend;
 
         programs.onlyoffice.enable = true; # maybe open source but from binary
 
@@ -426,7 +428,7 @@
               profile = "${pkgs.firejail}/etc/firejail/gnome-calculator.profile";
             };
             gnome-clocks = {
-              executable = "${hardenedPkg gnome-clocks}/bin/gnome-clocks";
+              executable = "${hardestPkg gnome-clocks}/bin/gnome-clocks";
               profile = "${pkgs.firejail}/etc/firejail/gnome-clocks.profile";
             };
             # https://github.com/librephoenix/nixos-config/blob/0c3b676ab9d3e93780f06dbe5e084048eeed9a32/modules/system/security/firejail/default.nix#L21
@@ -587,8 +589,10 @@
       with _include;
       {
         environment.systemPackages = with pkgs; [
-          #kiwix-apple
           nur.repos.mio.kiwix_patched
+          nur.repos.mio.kiwix-apple
+          nur.repos.mio.launchnext
+          nur.repos.mio.launchy
         ];
         homebrew.casks = [
           "nextcloud"

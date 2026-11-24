@@ -249,7 +249,8 @@ let
           description = ''
             On KDE Plasma 6, hardware brightness keys normally adjust every connected
             monitor. When enabled, PowerDevil's default shortcuts are disabled and
-            Monitor Brightness Up/Down target only the focused display (5% steps).
+            Monitor Brightness Up/Down target only the focused display (5% steps, or
+            1% steps with Ctrl+Shift or Alt+Shift).
             Hold-to-repeat is handled in the helper via evdev; the session user is
             added to the `input` group (re-login required after first enable).
           '';

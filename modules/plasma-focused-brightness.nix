@@ -57,6 +57,26 @@ let
             command = "${lib.getExe plasmaFocusedBrightness} down";
             logs.enabled = false;
           };
+          "increase-focused-brightness-fine" = {
+            name = "Increase Focused Display Brightness (1%)";
+            comment = "increase-focused-brightness-fine";
+            keys = [
+              "Ctrl+Shift+Monitor Brightness Up"
+              "Alt+Shift+Monitor Brightness Up"
+            ];
+            command = "${lib.getExe plasmaFocusedBrightness} up 1";
+            logs.enabled = false;
+          };
+          "decrease-focused-brightness-fine" = {
+            name = "Decrease Focused Display Brightness (1%)";
+            comment = "decrease-focused-brightness-fine";
+            keys = [
+              "Ctrl+Shift+Monitor Brightness Down"
+              "Alt+Shift+Monitor Brightness Down"
+            ];
+            command = "${lib.getExe plasmaFocusedBrightness} down 1";
+            logs.enabled = false;
+          };
         };
       };
     };

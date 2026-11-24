@@ -7,31 +7,23 @@
       den.aspects.games
     ];
     os =
-      args@{ pkgs, inputs, ... }:
-      let
-        _include =
-          args._include or (
-            if pkgs.stdenv.hostPlatform.isDarwin then
-              (import ../mac/include.nix args)
-            else
-              (import ../nixos/include.nix args)
-          );
-        inherit (_include) progs;
-      in
+      args@{
+        pkgs,
+        inputs,
+        _include,
+        ...
+      }:
+      with _include;
       {
         environment.systemPackages = with pkgs; [
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-bin
         ];
 
         systemPackages_hardened = with pkgs; [
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.serein
           progs.inkscape
           cyberchef
-          (
-            if pkgs.stdenv.hostPlatform.isDarwin then
-              inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.comaps
-            else
-              comaps
-          )
+          comaps
           photocraft
           deckcraft
           gridcraft
@@ -39,7 +31,12 @@
           cadcraft
           #lightcraft
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.chatbox
-          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.archivetune
+          (
+            if pkgs.stdenv.hostPlatform.isDarwin then
+              pkgs-pin9.nur.repos.mio.archivetune
+            else
+              inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.archivetune
+          )
           progs.bifrost
           downkyicore
           ghidra
@@ -60,6 +57,10 @@
           obsidian
           chatgpt
           reaper
+        ];
+        systemPackages_clean = with pkgs; [
+          # unfree:
+          #(if pkgs.stdenv.hostPlatform.isLinux then antigravity-ide-fhs else antigravity-ide)
         ];
       };
     nixos =
@@ -121,7 +122,6 @@
         systemPackages_clean = with pkgs; [
           # unfree:
           android-studio
-          antigravity-ide-fhs
           # DETAILS REMOVED
         ];
 
@@ -242,7 +242,10 @@
       {
         environment.systemPackages = with pkgs; [
           #nur.repos.mio.telegram-mac
-          nur.repos.mio.mac-apk
+          #nur.repos.mio.mac-apk
+          nur.repos.mio.onlyswitch
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -264,9 +267,8 @@
           # unfree:
           #zoom-us # recording scrren permission problems. use homebrew version then
           #jetbrains.clion
-          antigravity-ide
           #code-cursor # in app updater, better with cask.
-          slack
+          #slack
         ];
 
         homebrew.casks = [
@@ -279,7 +281,7 @@
           #"affinity"
           "microsoft-teams"
           "adobe-acrobat-reader"
-          "adobe-creative-cloud"
+          #"adobe-creative-cloud"
           "signal"
           #"rider"
           "wave"
@@ -290,19 +292,19 @@
           "steam"
           "microsoft-office"
           "microsoft-auto-update"
-          "electerm"
+          #"electerm"
           #"chromium"
           "calibre"
           "prismlauncher"
           "openzfs" # or manually upgrade with https://github.com/openzfsonosx/openzfs-fork/releases
           "betterdisplay"
           "balenaetcher"
-          "microsoft-edge"
-          "cleanshot"
+          #"microsoft-edge"
+          #"cleanshot"
           "cloudflare-warp"
           "utm"
           #"chatgpt"
-          "only-switch"
+          #"only-switch"
           "zulip"
           #"raycast"
           "orbstack"

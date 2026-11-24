@@ -45,7 +45,9 @@ let
     { pkgs, inputs, ... }:
     with pkgs;
     [
-      elan
+      (pkgs.lib.hiPrio elan)
+      lean4
+      agda
       nur.repos.mio.nurl_patched
       autossh
       go
@@ -56,6 +58,9 @@ let
       opencode
       #github-copilot-cli
       #nur.repos.mio.freebuff
+      agent-browser
+      officecli
+      nixpkgs-reviewFull
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       dsh
@@ -98,8 +103,6 @@ in
             (maven.override { jdk_headless = progs.jdk_headless; })
             (ammonite.override { jre = progs.jre; })
             progs.jdk
-            agda
-            lean4
             yarn-berry
             update-nix-fetchgit
             gnumake
@@ -108,7 +111,6 @@ in
             nixd
             jq
             ffmpeg-full
-            nixpkgs-reviewFull
             nix-update
             nix-tree
             haskell-language-server
@@ -123,6 +125,7 @@ in
             #claude-code
             distrobox
             gcc
+            nur.repos.mio.zfs-dedup
           ];
         environment.systemPackages = with pkgs; [
           antigravity-cli
@@ -176,6 +179,7 @@ in
               ;
           }
           ++ [
+            nur.repos.mio.ryubing
             mdbook
             nur.repos.mio.mdbook-generate-summary
             uv
@@ -198,7 +202,6 @@ in
             agda
             lean4
             #isabelle # cli only; use brew cask then
-            nixpkgs-review
             nix-update
             llvmPackages.bintools # provides readelf that gef needs
             yt-dlp
@@ -219,10 +222,6 @@ in
             # unsupported on x86_64 macOS:
             tuxguitar
           ]
-          ++ lib.optional (
-            pkgs.stdenv.hostPlatform.isAarch64
-            && inputs.mio.packages.${pkgs.stdenv.hostPlatform.system} ? ryubing
-          ) inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ryubing
           ++ [
             (lib.hiPrio antigravity-cli) # higher prio than gui app for cli command "antigravity"
           ];

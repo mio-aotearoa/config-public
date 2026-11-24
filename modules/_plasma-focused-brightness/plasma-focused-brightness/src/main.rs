@@ -37,7 +37,7 @@ const DEFAULT_REPEAT_DELAY: Duration = Duration::from_millis(600);
 const DEFAULT_REPEAT_INTERVAL: Duration = Duration::from_millis(40);
 const POLL_INTERVAL: Duration = Duration::from_millis(5);
 const TARGET_CACHE_TTL: Duration = Duration::from_millis(2000);
-const STEP_PERCENT: u32 = 5;
+const DEFAULT_STEP_PERCENT: u32 = 5;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Direction {
@@ -309,6 +309,7 @@ fn adjust_brightness_once(
     connection: &Connection,
     config: &Config,
     direction: Direction,
+    step_percent: u32,
 ) -> Result<()> {
     let Some(display) = resolve_target_display(connection, config)? else {
         return Ok(());
@@ -320,10 +321,7 @@ fn adjust_brightness_once(
         return Ok(());
     }
 
-    let mut step = max.saturating_mul(STEP_PERCENT) / 100;
-    if step == 0 {
-        step = 1;
-    }
+    let step = (max.saturating_mul(step_percent).saturating_add(50) / 100).max(1);
 
     let new_val = match direction {
         Direction::Up => current.saturating_add(step).min(max),
@@ -390,13 +388,14 @@ fn repeat_timing(devices: &[Device]) -> (Duration, Duration) {
     (delay, interval)
 }
 
-fn spawn_hold_repeat_worker(direction: Direction) -> Result<()> {
+fn spawn_hold_repeat_worker(direction: Direction, step_percent: u32) -> Result<()> {
     let program = env::args()
         .next()
         .context("missing argv0 for hold-repeat worker")?;
     Command::new(program)
         .env(WORKER_ENV, "1")
         .arg(direction.label())
+        .arg(step_percent.to_string())
         .stdin(Stdio::null())
         .stdout(Stdio::null())
         .stderr(Stdio::null())
@@ -405,7 +404,12 @@ fn spawn_hold_repeat_worker(direction: Direction) -> Result<()> {
     Ok(())
 }
 
-fn run_hold_repeat_worker(connection: &Connection, config: &Config, direction: Direction) -> Result<()> {
+fn run_hold_repeat_worker(
+    connection: &Connection,
+    config: &Config,
+    direction: Direction,
+    step_percent: u32,
+) -> Result<()> {
     let lock_file = config
         .state_dir
         .join(format!("{}.repeat.lock", direction.label()));
@@ -443,7 +447,7 @@ fn run_hold_repeat_worker(connection: &Connection, config: &Config, direction: D
             && now.duration_since(last_ramp) >= repeat_interval
         {
             // Ignore transient D-Bus errors so a single failure does not abort a hold.
-            let _ = adjust_brightness_once(connection, config, direction);
+            let _ = adjust_brightness_once(connection, config, direction, step_percent);
             last_ramp = now;
         }
 
@@ -452,20 +456,32 @@ fn run_hold_repeat_worker(connection: &Connection, config: &Config, direction: D
 }
 
 fn main() -> Result<()> {
+    let mut args = env::args().skip(1);
     let direction = Direction::parse(
-        env::args()
-            .nth(1)
-            .context("usage: plasma-focused-brightness up|down")?
+        args.next()
+            .context("usage: plasma-focused-brightness up|down [step_percent]")?
             .as_str(),
     )?;
+    let step_percent = match args.next() {
+        Some(raw) => {
+            let value: u32 = raw
+                .parse()
+                .with_context(|| format!("invalid step percent {raw:?}; expected integer 1..=100"))?;
+            if !(1..=100).contains(&value) {
+                bail!("step percent must be between 1 and 100, got {value}");
+            }
+            value
+        }
+        None => DEFAULT_STEP_PERCENT,
+    };
     let config = Config::for_session();
     let connection = Connection::session().context("connect to session bus")?;
 
     if env::var(WORKER_ENV).is_ok() {
-        return run_hold_repeat_worker(&connection, &config, direction);
+        return run_hold_repeat_worker(&connection, &config, direction, step_percent);
     }
 
-    adjust_brightness_once(&connection, &config, direction)?;
-    spawn_hold_repeat_worker(direction)?;
+    adjust_brightness_once(&connection, &config, direction, step_percent)?;
+    spawn_hold_repeat_worker(direction, step_percent)?;
     Ok(())
 }

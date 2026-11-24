@@ -72,6 +72,7 @@ upper
     config = config.nixpkgs.config;
     system = pkgs.stdenv.hostPlatform.system;
     overlays = [
+      inputs.nur.overlays.default
     ];
   };
 

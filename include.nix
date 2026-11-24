@@ -52,6 +52,7 @@ customize
   allowUnfreeNonSourcePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
+      "chatgpt-primary-runtime"
       "reaper"
       "firefox-esr-140-bin-unwrapped"
       "libnvvm"
@@ -187,10 +188,12 @@ customize
         "${inputs.nixpkgs}/pkgs/by-name/ce/celeste64/deps.json"
         "${inputs.nixpkgs}/pkgs/by-name/pi/pinta/deps.json"
         "${inputs.nixpkgs}/pkgs/by-name/di/discordchatexporter-desktop/deps.json"
+        "${inputs.nixpkgs}/pkgs/by-name/of/officecli/deps.json"
         # inputs.nur.legacyPackages."${pkgs.stdenv.hostPlatform.system}".repo-sources.mio
         #"${inputs.mio}/by-name/di/discordchatexporter-desktop_patched/deps.json"
       ];
       allowed = [
+        "launchy"
         "proton-cachyos"
         "proton-ge-custom"
         "libwebrtc"

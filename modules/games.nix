@@ -24,6 +24,7 @@
         systemPackages_clean =
           with pkgs;
           [
+            nur.repos.mio.gt3-revisited
             #(offloadPkg prismlauncher)
             (offloadPkg ryubing)
             (offloadPkg luanti-client)
@@ -144,7 +145,7 @@
           extraCompatPackages = [
             pkgs-chaotic.proton-cachyos-bin_x86_64_v3
             pkgs.steam-play-none
-            pkgs-chaotic.proton-ge-custom
+            pkgs-chaotic.proton-ge-bin_edge
             #pkgs.luxtorpeda
           ];
           extraPackages =

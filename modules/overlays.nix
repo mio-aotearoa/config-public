@@ -26,6 +26,7 @@
       in
       with _include;
       {
+        programs.darling.package = inputs.mio.legacyPackages."${system}".patched.darling;
         nixpkgs.overlays = [
           inputs.nur.overlays.default
           #inputs.copyparty.overlays.default
@@ -41,9 +42,8 @@
               inherit (mio) wireguird miodroid;
               inherit (mio.patched)
                 vscodium
-                darling
                 grub2
-                starship
+                # starship
                 sniffnet
                 xfce4-terminal
                 android-translation-layer
@@ -97,16 +97,18 @@
               mio = inputs.mio.legacyPackages."${pkgs.stdenv.hostPlatform.system}";
             in
             {
-              raycast = mio.raycast_macos15;
               inherit (mio.patched)
                 vscodium
-                jadx
-                starship
+                # starship
                 qbittorrent-enhanced
-                uutils-diffutils
                 trayscale
+                nixtamal
+                comaps
                 ;
-              inherit (pkgs-pin8) blender;
+              inherit (pkgs-pin9)
+                remmina
+                wordcraft
+                ;
             }
           )
         ];

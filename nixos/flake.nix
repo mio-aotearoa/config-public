@@ -353,20 +353,16 @@
         inputs.naersk.inputs.nixpkgs.follows = "nixpkgs";
       };
     */
-    # pin niche inputs to avoid bad people taking over.
-    import-tree.url = "github:denful/import-tree/eb1b52eaecc57f7c136d07ae8a93e724dfecac46";
-    # pin niche inputs to avoid bad people taking over.
-    den.url = "github:denful/den/bf2504f9f2e8621fee091335132ab3ae698cf808";
+    import-tree.url = "github:denful/import-tree";
+    den.url = "github:denful/den";
     # pin to avoid rebuild
-    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
+    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/19807e8136a33146264787f74910d235e2b25854";
     chinese-fonts-overlay = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:brsvh/chinese-fonts-overlay/a14d554299d1c8a5f4329a215d4d6217d99bf307";
+      url = "github:brsvh/chinese-fonts-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     apple-fonts = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:Lyndeno/apple-fonts.nix/3861e2249cb244bfbc7cfab2303c152cf5f9d9e9";
+      url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpak-apps = {
@@ -445,11 +441,13 @@
                   hash = "sha256-H4NMS9eDsJ1zM6gLQdZtyyBYumjKArrCFDcWeE+IOJQ=";
                 })
               */
-              (fetchpatch {
-                name = "nixos/btrfs: add services.btrfs.autoReclaim option";
-                url = "https://github.com/NixOS/nixpkgs/pull/527555.patch";
-                hash = "sha256-QAnG7lVV3zwpHyraSwGVOKK62gxGvECvKSXSKpdpw5w=";
-              })
+              /*
+                (fetchpatch {
+                  name = "nixos/btrfs: add services.btrfs.autoReclaim option";
+                  url = "https://github.com/NixOS/nixpkgs/pull/527555.patch";
+                  hash = "sha256-QAnG7lVV3zwpHyraSwGVOKK62gxGvECvKSXSKpdpw5w=";
+                })
+              */
               (fetchpatch {
                 name = "nixos/bash: Reset title bar only for interactive shells";
                 url = "https://github.com/NixOS/nixpkgs/pull/521688.patch";

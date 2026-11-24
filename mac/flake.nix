@@ -20,8 +20,8 @@
     #nixpkgs-pin5.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1105041.885ba4d038f1/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
     nixpkgs-pin6.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1051111.d482ef84049d/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
     #nixpkgs-pin7.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1104102.e62746b0b472/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
-    nixpkgs-pin8.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1120695.5d2b81a7a3be/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
-    #nixpkgs-pin9.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1106208.d357a2b54f0b/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
+    #nixpkgs-pin8.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1120695.5d2b81a7a3be/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
+    nixpkgs-pin9.url = "https://releases.nixos.org/nixpkgs/nixpkgs-26.11pre1124565.19cfded70b91/nixexprs.tar.zst"; # a commit from nixpkgs-unstable
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +64,7 @@
     #};
     mac-app-util = {
       url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-pin9";
       #inputs.nixpkgs.url = "github:NixOS/nixpkgs/b579d443b37c9c5373044201ea77604e37e748c8"; # a commit from nixpkgs-unstable
       inputs.flake-utils.follows = "flake-utils";
       inputs.cl-nix-lite.inputs.flake-parts.follows = "flake-parts";
@@ -94,7 +94,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     # pin to avoid rebuild
-    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/2dc3f5d6aebfeed3db0468d47334dfc4ba8e6b6e";
+    mio-betterbird.url = "github:mio-aotearoa/nurpkgs/19807e8136a33146264787f74910d235e2b25854";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -108,18 +108,14 @@
       url = "github:mio-aotearoa/exo";
       #inputs.nixpkgs.follows = "nixpkgs";
     };
-    # pin niche inputs to avoid bad people taking over.
-    import-tree.url = "github:denful/import-tree/eb1b52eaecc57f7c136d07ae8a93e724dfecac46";
-    # pin niche inputs to avoid bad people taking over.
-    den.url = "github:denful/den/bf2504f9f2e8621fee091335132ab3ae698cf808";
+    import-tree.url = "github:denful/import-tree";
+    den.url = "github:denful/den";
     apple-fonts = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:Lyndeno/apple-fonts.nix/3861e2249cb244bfbc7cfab2303c152cf5f9d9e9";
+      url = "github:Lyndeno/apple-fonts.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chinese-fonts-overlay = {
-      # pin niche inputs to avoid bad people taking over.
-      url = "github:brsvh/chinese-fonts-overlay/a14d554299d1c8a5f4329a215d4d6217d99bf307";
+      url = "github:brsvh/chinese-fonts-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
