@@ -60,6 +60,7 @@ let
       #nur.repos.mio.freebuff
       agent-browser
       officecli
+      nixpkgs-reviewFull
     ]
     ++ (with inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}; [
       dsh
@@ -110,7 +111,6 @@ in
             nixd
             jq
             ffmpeg-full
-            nixpkgs-reviewFull
             nix-update
             nix-tree
             haskell-language-server
@@ -202,7 +202,6 @@ in
             agda
             lean4
             #isabelle # cli only; use brew cask then
-            nixpkgs-review
             nix-update
             llvmPackages.bintools # provides readelf that gef needs
             yt-dlp
