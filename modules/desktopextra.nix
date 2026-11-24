@@ -20,6 +20,7 @@
         ];
 
         systemPackages_hardened = with pkgs; [
+          evince
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.serein
           progs.inkscape
           cyberchef
@@ -248,7 +249,6 @@
           #mousecape
           #gnome-calculator
           #gnome-text-editor
-          #inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.evince
           #adwaita-icon-theme
           #hicolor-icon-theme
           #gsettings-desktop-schemas

@@ -106,6 +106,7 @@
                 comaps
                 remmina
                 baobab
+                evince
                 ;
             }
           )
