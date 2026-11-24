@@ -105,6 +105,7 @@
                 nixtamal
                 comaps
                 remmina
+                baobab
                 ;
             }
           )
