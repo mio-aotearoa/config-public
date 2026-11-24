@@ -278,7 +278,7 @@
           #"affinity"
           "microsoft-teams"
           "adobe-acrobat-reader"
-          "adobe-creative-cloud"
+          #"adobe-creative-cloud"
           "signal"
           #"rider"
           "wave"
