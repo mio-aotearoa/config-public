@@ -57,7 +57,7 @@
             #herdr
             #git-repo
             nur.repos.mio.pmbootstrap_git # pmbootstrap
-            nur.repos.mio.lastbook_patched
+            inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.lastbook_patched
             #clang
             baidupcs-go
             nix-init
