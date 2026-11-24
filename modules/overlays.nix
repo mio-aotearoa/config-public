@@ -101,7 +101,6 @@
                 vscodium
                 # starship
                 qbittorrent-enhanced
-                uutils-diffutils
                 trayscale
                 nixtamal
                 comaps
