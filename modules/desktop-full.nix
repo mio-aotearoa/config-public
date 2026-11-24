@@ -270,6 +270,13 @@
       {
         systemPackages_hardest = with pkgs; [
           kiwix
+          #bottles
+          #kdePackages.sddm-kcm
+          kdePackages.kweather
+          (wrapPrio gnome-clocks)
+          #ventoy-full
+          #ventoy-full-qt # qt version looks broken under kde plasma
+          ventoy-full-gtk
         ];
         systemPackages_hardened =
           with pkgs;
@@ -289,13 +296,6 @@
             progs.zulip
             normcap
             (if qtIsPreferred then libreoffice-qt-stable else libreoffice-stable)
-            #bottles
-            #kdePackages.sddm-kcm
-            kdePackages.kweather
-            (wrapPrio gnome-clocks)
-            #ventoy-full
-            #ventoy-full-qt # qt version looks broken under kde plasma
-            ventoy-full-gtk
             nextcloud-client
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.prospect-mail
             nur.repos.mio.icloud-mail
