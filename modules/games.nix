@@ -189,6 +189,7 @@
       { pkgs, ... }:
       {
         environment.systemPackages = with pkgs; [
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ryubing_patched
           luanti-client
           nur.repos.mio.minetest591client
           nur.repos.mio.beammp-launcher
