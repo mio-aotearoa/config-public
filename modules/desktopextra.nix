@@ -243,6 +243,7 @@
           nur.repos.mio.onlyswitch
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
+          racket
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -272,7 +273,7 @@
           "inmusic-software-center"
           "native-access"
           "zoom"
-          "racket"
+          #"racket"
           "cursor"
           #"affinity"
           "microsoft-teams"
