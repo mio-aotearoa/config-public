@@ -244,6 +244,7 @@
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
           racket
+          prusa-slicer
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -285,7 +286,7 @@
           "lm-studio"
           "rclone-ui"
           #"android-commandlinetools"
-          "prusaslicer"
+          #"prusaslicer"
           "steam"
           "microsoft-office"
           "microsoft-auto-update"
