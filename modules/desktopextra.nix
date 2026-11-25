@@ -247,6 +247,7 @@
           calibre
           prusa-slicer
           gimp
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.kdenlive_patched
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -317,7 +318,7 @@
           "alienator88-sentinel"
           # Good Linux GUI packages:
           "kicad"
-          "kdenlive"
+          #"kdenlive"
           #"krita"
           #"gimp"
           "freecad"
