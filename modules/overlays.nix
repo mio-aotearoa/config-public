@@ -110,6 +110,8 @@
                 krita
                 calibre
                 gimp
+                kicad
+                freecad
                 ;
             }
           )

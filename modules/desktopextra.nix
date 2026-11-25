@@ -248,6 +248,8 @@
           prusa-slicer
           gimp
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.kdenlive_patched
+          kicad
+          freecad
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -317,11 +319,11 @@
           "rustdesk"
           "alienator88-sentinel"
           # Good Linux GUI packages:
-          "kicad"
+          #"kicad"
           #"kdenlive"
           #"krita"
           #"gimp"
-          "freecad"
+          #"freecad"
           #"inkscape"
         ];
         homebrew.brews = [
