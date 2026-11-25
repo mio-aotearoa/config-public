@@ -313,7 +313,7 @@
           # Good Linux GUI packages:
           "kicad"
           "kdenlive"
-          "krita"
+          #"krita"
           "gimp"
           "freecad"
           #"inkscape"
