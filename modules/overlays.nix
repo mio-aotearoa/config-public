@@ -109,6 +109,7 @@
                 famistudio
                 krita
                 calibre
+                gimp
                 ;
             }
           )

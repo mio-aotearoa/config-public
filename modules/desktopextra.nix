@@ -246,6 +246,7 @@
           racket
           calibre
           prusa-slicer
+          gimp
 
           #qdiskinfo # needs more patches
           #kdiskmark # needs more patches
@@ -318,7 +319,7 @@
           "kicad"
           "kdenlive"
           #"krita"
-          "gimp"
+          #"gimp"
           "freecad"
           #"inkscape"
         ];
