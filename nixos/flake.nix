@@ -376,6 +376,10 @@
       url = "github:sophronesis/nix-framework-fingerprint-led-blink/bc3aabfcebdbf774734fdef83b59794b77dbaad8";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-tarmac = {
+      url = "github:Mic92/nix-tarmac";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

@@ -62,6 +62,7 @@
       den.aspects.harmonia
       den.aspects.token
       den.aspects.hardened
+      den.aspects.nixbuild
     ];
     os =
       args@{
@@ -197,7 +198,7 @@
           inputs.chaotic.nixosModules.zfs-impermanence-on-shutdown # inputs.nur.legacyPackages."${system}".repos.mio.modules.zfs-impermanence-on-shutdown
           inputs.mio.legacyPackages."${system}".modules.darling
           inputs.mio.legacyPackages."${system}".modules.wireguird
-          (import ../aspect.nix "nixbuild")
+          inputs.nix-tarmac.nixosModules.default
         ];
 
         system.extraDependencies =
