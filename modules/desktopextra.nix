@@ -112,6 +112,7 @@
           (lib.hiPrio pkgs.aseprite) # lib.hiPrio: a file colliding with libresprite
           #davinci-resolve
           lmstudio
+          lmstudio-bionic
           google-chrome # does antigravity only work with google-chrome?
           code-cursor
         ];
