@@ -244,6 +244,7 @@
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
           racket
+          calibre
           prusa-slicer
 
           #qdiskinfo # needs more patches
@@ -292,7 +293,7 @@
           "microsoft-auto-update"
           #"electerm"
           #"chromium"
-          "calibre"
+          #"calibre"
           "prismlauncher"
           "openzfs" # or manually upgrade with https://github.com/openzfsonosx/openzfs-fork/releases
           "betterdisplay"
