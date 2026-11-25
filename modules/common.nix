@@ -1018,9 +1018,6 @@
           mkdir -p "$fromDir"
 
           ${inputs.mac-app-util.packages.${pkgs.stdenv.system}.default}/bin/mac-app-util mktrampoline \
-            "${pkgs.famistudio}/bin/famistudio" \
-            "$fromDir/FamiStudio.app"
-          ${inputs.mac-app-util.packages.${pkgs.stdenv.system}.default}/bin/mac-app-util mktrampoline \
             "${octaveGui}/bin/octave" \
             "$fromDir/Octave.app"
         '';

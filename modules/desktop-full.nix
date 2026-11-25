@@ -243,6 +243,7 @@
       in
       {
         systemPackages_hardened = with pkgs; [
+          krita
           trayscale
           localsend
           element-desktop
@@ -285,7 +286,6 @@
             simple-scan
             (wrapPrio gnome-calculator)
             (wrapPrio gnome-system-monitor)
-            krita
             gimp
             saber
             gparted

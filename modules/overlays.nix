@@ -106,6 +106,8 @@
                 comaps
                 remmina
                 evince
+                famistudio
+                krita
                 ;
             }
           )
