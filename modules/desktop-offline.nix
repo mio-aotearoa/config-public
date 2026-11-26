@@ -134,6 +134,7 @@
           with pkgs;
           [
             kelivo
+            disktree
             inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.ladybird_patched # ladybird
             #gnome-online-accounts-gtk
             #gnome-calendar
