@@ -112,7 +112,6 @@
                 gimp
                 kicad
                 freecad
-                kate
                 ;
             }
           )
