@@ -64,7 +64,7 @@
     #"lulu"
     "knockknock"
     # Good Linux GUI packages:
-    "kate"
+    #"kate"
     # NOTE: SOME FONTS ARE INSTALLED FOR PRIMARY USER ONLY
     "font-sf-mono"
     "font-sf-pro"
