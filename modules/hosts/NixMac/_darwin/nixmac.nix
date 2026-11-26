@@ -48,6 +48,7 @@
     #fdroidserver
     #sdkmanager # IT IS INSTALLING LINUX BINARY ON THE MAC
     supertuxkart
+    nur.repos.mio.kate_patched
   ];
 
   #homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
@@ -64,7 +65,7 @@
     #"lulu"
     "knockknock"
     # Good Linux GUI packages:
-    "kate"
+    #"kate"
     # NOTE: SOME FONTS ARE INSTALLED FOR PRIMARY USER ONLY
     "font-sf-mono"
     "font-sf-pro"
