@@ -79,6 +79,12 @@ let
           };
 
           launchd.daemons.harmonia = {
+            path = [
+              config.nix.package
+              "/run/current-system/sw/bin"
+              "/nix/var/nix/profiles/default/bin"
+            ];
+
             environment = {
               CONFIG_FILE = "${cacheConfigFile}";
               SIGN_KEY_PATHS = lib.concatStringsSep " " cacheCfg.signKeyPaths;
@@ -92,18 +98,25 @@ let
 
               KeepAlive = true;
               RunAtLoad = true;
+              ThrottleInterval = 5;
 
-              StandardOutPath = "/tmp/harmonia.out.log";
-              StandardErrorPath = "/tmp/harmonia.err.log";
+              StandardOutPath = "/var/log/harmonia.out.log";
+              StandardErrorPath = "/var/log/harmonia.err.log";
 
               WorkingDirectory = "/tmp";
-              Umask = 54; # 0066 decimal
+              Umask = 18; # 0022 decimal
             };
           };
         })
 
         (lib.mkIf daemonCfg.enable {
           launchd.daemons.harmonia-daemon = {
+            path = [
+              config.nix.package
+              "/run/current-system/sw/bin"
+              "/nix/var/nix/profiles/default/bin"
+            ];
+
             environment = {
               RUST_LOG = daemonCfg.logLevel;
               RUST_BACKTRACE = "1";
@@ -119,12 +132,13 @@ let
 
               KeepAlive = true;
               RunAtLoad = true;
+              ThrottleInterval = 5;
 
-              StandardOutPath = "/tmp/harmonia-daemon.out.log";
-              StandardErrorPath = "/tmp/harmonia-daemon.err.log";
+              StandardOutPath = "/var/log/harmonia-daemon.out.log";
+              StandardErrorPath = "/var/log/harmonia-daemon.err.log";
 
               WorkingDirectory = "/tmp";
-              Umask = 63; # 0077 decimal
+              Umask = 18; # 0022 decimal
             };
           };
         })
