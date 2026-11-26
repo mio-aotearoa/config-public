@@ -132,7 +132,7 @@ let
     };
 in
 {
-  den.aspects.harmonia = {
+  den.aspects.harmonia_module_definition = {
     description = "Harmonia binary cache nix-darwin service module (options + launchd)";
     darwin = {
       imports = [ harmoniaDarwinModule ];
