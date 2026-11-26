@@ -7,7 +7,7 @@
 journalctl | grep pam_fprintd
 journalctl -u sshd.service -b
 ```
-**Status**: Still open. Bypass lives in `modules/sudo-fprint-ssh-bypass.nix` (works for normal SSH).
+**Status**: Fixed in `modules/sudo-fprint-ssh-bypass.nix`. The helper no longer relies on `pam_exec`'s minimal environment; it walks the invoking shell/process ancestry and checks the currently attached tmux clients, so detach/reattach does not leave a stale SSH signal.
 
 ## Issue 2: KDE Plasma Lockscreen Unlock (intermittent after suspend)
 

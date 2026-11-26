@@ -14,7 +14,7 @@
         isSudoFprintEnabled = config.security.pam.services.sudo.fprintAuth or false;
       in
       {
-        # BUG: Not Bypassed in tmux in ssh
+        # Fixed: sudo inside tmux over SSH now skips fprintd as well.
         # Only evaluate and inject this PAM rule if fprintd is configured for sudo.
         security.pam.services.sudo.rules.auth.skip_fprintd_for_ssh = lib.mkIf isSudoFprintEnabled {
           enable = true;
@@ -33,14 +33,96 @@
           args = [
             "quiet"
             "${pkgs.writeShellScript "pam-sudo-ssh-bypass" ''
-              if [ -n "$SSH_TTY" ] || [ -n "$SSH_CONNECTION" ] || [ -n "$SSH_CLIENT" ]; then
-                # The presence of SSH-related environment variables strongly indicates an SSH session.
-                # Exit 0 instructs PAM to trigger success=1, thereby bypassing fprintd.
+              # pam_exec only passes its PAM environment (PAM_SERVICE, PAM_USER, ...)
+              # here, not sudo's parent environment. Checking only this script's
+              # environment therefore misses normal SSH sessions as well as sudo
+              # started from a tmux pane, where the pane shell is a child of the
+              # long-lived tmux server rather than sshd.
+              env_has() {
+                local file=$1 name=$2 entry
+                [ -r "$file" ] || return 1
+                while IFS= read -r -d "" entry; do
+                  case "$entry" in
+                    "$name="*) return 0 ;;
+                  esac
+                done 2>/dev/null < "$file"
+                return 1
+              }
+
+              proc_parent() {
+                local pid=$1 key value rest
+                while read -r key value rest; do
+                  if [ "$key" = "PPid:" ]; then
+                    printf '%s' "$value"
+                    return 0
+                  fi
+                done 2>/dev/null < "/proc/$pid/status"
+                return 1
+              }
+
+              has_ssh_env() {
+                local file=$1
+                env_has "$file" SSH_CONNECTION \
+                  || env_has "$file" SSH_CLIENT \
+                  || env_has "$file" SSH_TTY
+              }
+
+              if [ -n "''${SSH_TTY:-}" ] || [ -n "''${SSH_CONNECTION:-}" ] || [ -n "''${SSH_CLIENT:-}" ]; then
                 exit 0
               fi
 
-              # The session is local (e.g., seat0 physical hardware).
-              # Exit 1 instructs PAM to ignore the rule and evaluate fprintd normally.
+              # Find the TMUX socket used by the invoking shell. The tmux server
+              # can outlive the SSH connection that started it, so the pane
+              # environment may be stale after detach/reattach. The currently
+              # attached tmux client environment reflects the session in use now.
+              tmux_socket=""
+              pid=$PPID
+              depth=32
+              while [ "$pid" -gt 1 ] && [ "$depth" -gt 0 ]; do
+                if [ -r "/proc/$pid/environ" ]; then
+                  while IFS= read -r -d "" entry; do
+                    case "$entry" in
+                      TMUX=*)
+                        tmux_socket=''${entry#TMUX=}
+                        tmux_socket=''${tmux_socket%%,*}
+                        break
+                        ;;
+                    esac
+                  done 2>/dev/null < "/proc/$pid/environ"
+                fi
+                [ -n "$tmux_socket" ] && break
+                pid=$(proc_parent "$pid") || break
+                depth=$((depth - 1))
+              done
+
+              if [ -n "$tmux_socket" ] && [ -S "$tmux_socket" ]; then
+                if tmux_clients=$("${pkgs.coreutils}/bin/timeout" 2 "${pkgs.tmux}/bin/tmux" -S "$tmux_socket" list-clients -F '#{client_pid}' 2>/dev/null); then
+                  for client_pid in $tmux_clients; do
+                    if has_ssh_env "/proc/$client_pid/environ"; then
+                      exit 0
+                    fi
+                  done
+                  # Reachable tmux server with no SSH-attached client: stay local
+                  # even if an old pane environment still contains SSH variables.
+                  exit 1
+                fi
+              fi
+
+              # Direct SSH, or a tmux server we could not inspect: walk the
+              # invoking shell/process ancestry instead of relying on this
+              # helper's minimal PAM environment.
+              pid=$PPID
+              depth=32
+              while [ "$pid" -gt 1 ] && [ "$depth" -gt 0 ]; do
+                if has_ssh_env "/proc/$pid/environ"; then
+                  exit 0
+                fi
+                pid=$(proc_parent "$pid") || break
+                depth=$((depth - 1))
+              done
+
+              # Local session (e.g. seat0 physical hardware). Exit 1 tells PAM
+              # to ignore this rule and evaluate fprintd normally.
               exit 1
             ''}"
           ];
