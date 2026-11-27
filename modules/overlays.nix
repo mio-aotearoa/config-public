@@ -112,6 +112,7 @@
                 gimp
                 kicad
                 freecad
+                libreoffice
                 ;
             }
           )
