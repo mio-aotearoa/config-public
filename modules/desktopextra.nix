@@ -250,6 +250,7 @@
           prusa-slicer
           gimp
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.kdenlive_patched
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.sentinel
           kicad
           freecad
 
@@ -319,7 +320,7 @@
           "karabiner-elements"
           "logi-options+"
           "rustdesk"
-          "alienator88-sentinel"
+          #"alienator88-sentinel"
           # Good Linux GUI packages:
           #"kicad"
           #"kdenlive"
