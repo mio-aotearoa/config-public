@@ -100,8 +100,11 @@
       in
       with _include;
       {
+        environment.systemPackages = with pkgs; [
+          nur.repos.mio.frame
+        ];
         homebrew.casks = [
-          "66HEX/frame/frame" # https://github.com/66HEX/frame
+          #"66HEX/frame/frame" # https://github.com/66HEX/frame
           "duckduckgo"
           "sdformatter"
           "graalvm-jdk"
