@@ -113,6 +113,7 @@
                 kicad
                 freecad
                 libreoffice
+                xpipe
                 ;
             }
           )

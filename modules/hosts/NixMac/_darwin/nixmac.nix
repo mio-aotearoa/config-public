@@ -48,6 +48,7 @@
     nur.repos.mio.background-music
     xquartz
     libreoffice
+    xpipe
   ];
 
   homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
@@ -57,7 +58,7 @@
     #"background-music"
     #"xquartz"
     "switchresx"
-    "xpipe-io/tap/xpipe"
+    #"xpipe-io/tap/xpipe"
     "crossover"
     "cleanmymac-zh"
     "blockblock"
