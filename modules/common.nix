@@ -918,7 +918,6 @@
           #iina
           maccy
           keka
-          libreoffice-bin
           vlc-bin
           #whisky
           #stats
