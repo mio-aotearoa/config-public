@@ -7,10 +7,6 @@
   ...
 }:
 {
-  imports = [
-    #../../../../mac/newinstall.nix
-  ];
-
   networking.hostName = "NixMac";
 
   home-manager.users.user = (
