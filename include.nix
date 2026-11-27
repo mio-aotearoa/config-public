@@ -54,6 +54,7 @@ customize
     builtins.elem (lib.getName pkg) [
       "lmstudio-bionic"
       "skate3recomp"
+      "rexglue-skate3-sdk"
       "chatgpt-primary-runtime"
       "reaper"
       "firefox-esr-140-bin-unwrapped"
