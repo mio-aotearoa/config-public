@@ -103,10 +103,11 @@
         environment.systemPackages = with pkgs; [
           nur.repos.mio.frame
           nur.repos.mio.tabby-terminal
+          nur.repos.mio.duckduckgo-browser
         ];
         homebrew.casks = [
           #"66HEX/frame/frame" # https://github.com/66HEX/frame
-          "duckduckgo"
+          #"duckduckgo"
           "sdformatter"
           "graalvm-jdk"
           "plex"
