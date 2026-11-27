@@ -2,6 +2,19 @@
 {
   den.aspects.games = {
     description = "Games packages, firejail wrappers, steam, and gamescope";
+    os =
+      args@{
+        config,
+        inputs,
+        lib,
+        pkgs,
+        ...
+      }:
+      {
+        systemPackages_clean = with pkgs; [
+          nur.repos.mio.opensave_patched
+        ];
+      };
     nixos =
       args@{
         config,
