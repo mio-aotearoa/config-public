@@ -244,6 +244,7 @@
           nur.repos.mio.onlyswitch
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.electerm
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.steamac
+          inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.balena-etcher
           racket
           calibre
           prusa-slicer
@@ -302,7 +303,7 @@
           "prismlauncher"
           "openzfs" # or manually upgrade with https://github.com/openzfsonosx/openzfs-fork/releases
           "betterdisplay"
-          "balenaetcher"
+          #"balenaetcher"
           #"microsoft-edge"
           #"cleanshot"
           "cloudflare-warp"
