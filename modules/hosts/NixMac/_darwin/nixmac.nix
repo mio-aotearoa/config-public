@@ -51,7 +51,7 @@
     nur.repos.mio.kate_patched
   ];
 
-  #homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
+  homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
   homebrew.taps = [ "xpipe-io/tap" ];
   homebrew.casks = [
     "libreoffice"
