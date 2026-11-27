@@ -37,7 +37,8 @@
         systemPackages_clean =
           with pkgs;
           [
-            nur.repos.mio.gt3-revisited
+            (offloadPkg nur.repos.mio.gt3-revisited)
+            (offloadPkg nur.repos.mio.skate3recomp)
             #(offloadPkg prismlauncher)
             (offloadPkg ryubing)
             (offloadPkg luanti-client)
