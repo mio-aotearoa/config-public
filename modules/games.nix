@@ -31,6 +31,8 @@
         jovian = config.jovian.steam.enable or false;
       in
       {
+        networking.firewall.allowedTCPPorts = [ 8383 ]; # opensave
+
         # https://github.com/Electrostasy/dots/blob/6438185e9de14610ff4e8a9a82d0079a82a647ec/hosts/terra/gaming.nix#L8C1-L12C5
         boot.kernelModules = [ "ntsync" ];
 
