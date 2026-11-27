@@ -102,6 +102,7 @@
       {
         environment.systemPackages = with pkgs; [
           nur.repos.mio.frame
+          nur.repos.mio.tabby-terminal
         ];
         homebrew.casks = [
           #"66HEX/frame/frame" # https://github.com/66HEX/frame
@@ -109,7 +110,7 @@
           "sdformatter"
           "graalvm-jdk"
           "plex"
-          "tabby"
+          #"tabby"
         ];
       };
     nixos =
