@@ -238,6 +238,7 @@
       with _include;
       {
         environment.systemPackages = with pkgs; [
+          signal-desktop
           #nur.repos.mio.telegram-mac
           #nur.repos.mio.mac-apk
           nur.repos.mio.onlyswitch
@@ -285,7 +286,7 @@
           "microsoft-teams"
           "adobe-acrobat-reader"
           #"adobe-creative-cloud"
-          "signal"
+          #"signal"
           #"rider"
           "wave"
           "lm-studio"
