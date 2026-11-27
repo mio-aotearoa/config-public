@@ -45,14 +45,16 @@
     #sdkmanager # IT IS INSTALLING LINUX BINARY ON THE MAC
     supertuxkart
     nur.repos.mio.kate_patched
+    nur.repos.mio.background-music
+    xquartz
   ];
 
   homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
   homebrew.taps = [ "xpipe-io/tap" ];
   homebrew.casks = [
     "libreoffice"
-    "background-music"
-    "xquartz"
+    #"background-music"
+    #"xquartz"
     "switchresx"
     "xpipe-io/tap/xpipe"
     "crossover"
