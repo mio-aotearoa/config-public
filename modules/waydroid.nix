@@ -94,7 +94,7 @@
                 exec ${config.virtualisation.waydroid.package}/bin/waydroid "$@"
               ''
             ))
-            nur.repos.ataraxiasjel.waydroid-script
+            #nur.repos.ataraxiasjel.waydroid-script
             waydroid-helper
           ];
       };
