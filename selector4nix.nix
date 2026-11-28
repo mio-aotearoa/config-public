@@ -32,7 +32,7 @@ in
     configureSubstituter = "overwrite";
     settings = {
       proxy.resolution_policy = "priority";
-      proxy.rewrite_nar_url = false; # is this better? idk
+      #proxy.rewrite_nar_url = false; # is this better? idk
       network.nar_info_timeout_secs = 30;
       network.nar_timeout_secs = 30;
       network.tolerance_msecs = 10000;
