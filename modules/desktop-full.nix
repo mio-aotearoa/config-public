@@ -245,11 +245,13 @@
         systemPackages_hardened = with pkgs; [
           krita
           trayscale
-          localsend
           element-desktop
           qbittorrent-enhanced
           openlogi
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.pear-desktop_patched # pear-desktop
+        ];
+        systemPackages_hardest = with pkgs; [
+          localsend
         ];
         systemPackages_clean = [
           inputs.mio.packages.${pkgs.stdenv.hostPlatform.system}.omnimux
