@@ -15,4 +15,9 @@
     url = "https://github.com/NixOS/nixpkgs/pull/538842.diff";
     hash = "sha256-x8NW+7+cNYHVj9FzUyRoCH7IdFJr7L7snd7R/h0rMvs=";
   })
+  (fetchpatch {
+    name = "disktree: skip test that fails on ZFS builders";
+    url = "https://github.com/NixOS/nixpkgs/pull/588472.patch";
+    hash = "sha256-vnfSH/MybFDjFocVA21W044EKlA/AO9KQQ7+YYvyVKw=";
+  })
 ]
