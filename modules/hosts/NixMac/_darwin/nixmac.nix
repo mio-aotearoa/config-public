@@ -48,6 +48,7 @@
     nur.repos.mio.background-music
     xquartz
     xpipe
+    nur.repos.mio.knockknock
   ];
 
   homebrew.onActivation.cleanup = "uninstall"; # why do you put my other apps into trash bin...
@@ -61,7 +62,7 @@
     "cleanmymac-zh"
     "blockblock"
     #"lulu"
-    "knockknock"
+    #"knockknock"
     # Good Linux GUI packages:
     #"kate"
     # NOTE: SOME FONTS ARE INSTALLED FOR PRIMARY USER ONLY
