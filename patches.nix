@@ -15,12 +15,4 @@
     url = "https://github.com/NixOS/nixpkgs/pull/538842.diff";
     hash = "sha256-x8NW+7+cNYHVj9FzUyRoCH7IdFJr7L7snd7R/h0rMvs=";
   })
-  /*
-    (fetchpatch {
-      # https://github.com/NixOS/nixpkgs/pull/579996#issuecomment-6856710631
-      name = "isabelle: 2025-2 -> 2026";
-      url = "https://github.com/NixOS/nixpkgs/compare/master...srghma:nixpkgs:isabelle-2026-test.diff";
-      hash = "sha256-z2D7DCUq7JOtZHlnDIhg+vcoDdxsdkUUjzydWs+ZC5o=";
-    })
-  */
 ]

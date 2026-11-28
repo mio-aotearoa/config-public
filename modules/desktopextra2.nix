@@ -13,7 +13,7 @@
       {
 
         systemPackages_hardened = with pkgs; [
-          isabelle
+          nur.repos.mio.isabelle
         ];
       };
     nixos =
