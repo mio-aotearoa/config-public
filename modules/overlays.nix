@@ -48,6 +48,7 @@
                 xfce4-terminal
                 android-translation-layer
                 stuntrally
+                diffoscope
                 ;
             }
             // lib.optionalAttrs prev.stdenv.hostPlatform.isAarch64 {
