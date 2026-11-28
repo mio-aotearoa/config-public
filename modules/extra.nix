@@ -45,7 +45,7 @@ let
     { pkgs, inputs, ... }:
     with pkgs;
     [
-      (pkgs.lib.hiPrio elan)
+      #(pkgs.lib.hiPrio elan)
       lean4
       agda
       nur.repos.mio.nurl_patched
